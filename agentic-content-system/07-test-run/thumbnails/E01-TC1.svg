@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-label="Композиционен макет E01 TC-1">
+  <defs><pattern id="h1" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+  <line x1="0" y1="0" x2="0" y2="20" stroke="#FFFFFF" stroke-opacity="0.045" stroke-width="9"/></pattern></defs>
+  <rect width="1280" height="720" fill="#4E4B46"/>
+
+  <rect x="0" y="0" width="768" height="720" fill="#726D64"/>
+  <rect x="0" y="0" width="768" height="720" fill="url(#h1)"/>
+  <line x1="0" y1="0" x2="768" y2="720" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="2"/>
+  <line x1="768" y1="0" x2="0" y2="720" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="2"/>
+  <g font-family="ui-monospace, 'DejaVu Sans Mono', monospace" fill="#F1EDE5" text-anchor="middle">
+    <text x="384" y="76" font-size="19" letter-spacing="3" opacity="0.8">КАДЪР A · 60%</text>
+    <text x="384" y="112" font-size="26" font-weight="700">МАКРО · ПУКНАТИНА</text>
+    <text x="384" y="146" font-size="17" opacity="0.72">носеща стена · естествена светлина</text>
+    <text x="384" y="172" font-size="17" opacity="0.72">3 ъгъла · без светкавица</text>
+  </g>
+  <ellipse cx="384" cy="360" rx="126" ry="152" fill="none" stroke="#E03D14" stroke-width="11"/>
+  <text x="384" y="546" font-family="ui-monospace, 'DejaVu Sans Mono', monospace" font-size="16" fill="#E03D14" text-anchor="middle" letter-spacing="2">OVERLAY · маркер</text>
+
+  <rect x="768" y="0" width="512" height="720" fill="#22262A"/>
+  <rect x="768" y="0" width="512" height="720" fill="url(#h1)"/>
+  <line x1="768" y1="0" x2="1280" y2="720" stroke="#FFFFFF" stroke-opacity="0.07" stroke-width="2"/>
+  <line x1="1280" y1="0" x2="768" y2="720" stroke="#FFFFFF" stroke-opacity="0.07" stroke-width="2"/>
+  <rect x="872" y="112" width="304" height="340" fill="none" stroke="#5C8CA0" stroke-width="2" stroke-dasharray="9 7"/>
+  <line x1="872" y1="248" x2="1176" y2="248" stroke="#5C8CA0" stroke-width="2" stroke-dasharray="4 6"/>
+  <g font-family="ui-monospace, 'DejaVu Sans Mono', monospace" fill="#DFE5E8" text-anchor="middle">
+    <text x="1024" y="76" font-size="19" letter-spacing="3" opacity="0.8">КАДЪР B · 40%</text>
+    <text x="1024" y="326" font-size="24" font-weight="700">ПОРТРЕТ 85mm</text>
+    <text x="1024" y="360" font-size="16" opacity="0.72">поглед към дефекта,</text>
+    <text x="1024" y="386" font-size="16" opacity="0.72">не в камерата</text>
+    <text x="1024" y="418" font-size="16" opacity="0.72">вежди леко свити</text>
+    <text x="1024" y="486" font-size="14" fill="#5C8CA0" opacity="1">зона на лицето · 33%</text>
+    <text x="1024" y="232" font-size="13" fill="#5C8CA0">линия на очите · горна трета</text>
+  </g>
+
+  <g font-family="'Arial Narrow', 'Liberation Sans Narrow', Impact, sans-serif" font-weight="700">
+    <text x="48" y="682" font-size="126" fill="#FFFFFF" letter-spacing="-2"
+          style="paint-order:stroke" stroke="#0E0F11" stroke-width="14">38 000</text>
+    <text x="536" y="682" font-size="74" fill="#E03D14"
+          style="paint-order:stroke" stroke="#0E0F11" stroke-width="11">ЛВ.</text>
+  </g>
+  <text x="48" y="712" font-family="ui-monospace, 'DejaVu Sans Mono', monospace" font-size="14" fill="#E9E4DA" opacity="0.65" letter-spacing="1">1 ЧИСЛО + 1 ДУМА · тест на 10% ✓</text>
+</svg>

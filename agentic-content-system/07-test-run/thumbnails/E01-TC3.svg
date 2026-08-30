@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-label="Композиционен макет E01 TC-3">
+  <defs><pattern id="h2" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+  <line x1="0" y1="0" x2="0" y2="20" stroke="#FFFFFF" stroke-opacity="0.045" stroke-width="9"/></pattern></defs>
+  <rect width="1280" height="720" fill="#5B5852"/>
+  <rect width="1280" height="720" fill="url(#h2)"/>
+  <line x1="0" y1="0" x2="1280" y2="720" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="2"/>
+  <line x1="1280" y1="0" x2="0" y2="720" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="2"/>
+
+  <g font-family="ui-monospace, 'DejaVu Sans Mono', monospace" fill="#F2EEE6">
+    <text x="56" y="72" font-size="19" letter-spacing="3" opacity="0.8">ЕДИН КАДЪР · 100%</text>
+    <text x="56" y="110" font-size="27" font-weight="700">ТОЙ СОЧИ ДЕФЕКТА</text>
+    <text x="56" y="142" font-size="17" opacity="0.72">поглед В КАМЕРАТА · тяло към стената</text>
+    <text x="56" y="168" font-size="17" opacity="0.72">апартаментът разфокусиран отзад</text>
+  </g>
+
+  <rect x="110" y="214" width="400" height="440" fill="none" stroke="#5C8CA0" stroke-width="2" stroke-dasharray="9 7"/>
+  <text x="120" y="242" font-family="ui-monospace, 'DejaVu Sans Mono', monospace" font-size="15" fill="#5C8CA0">фигура · лице 34%</text>
+  <path d="M512 434 L916 244" fill="none" stroke="#5C8CA0" stroke-width="3" stroke-dasharray="10 8"/>
+  <circle cx="930" cy="238" r="32" fill="none" stroke="#E03D14" stroke-width="7"/>
+  <text x="972" y="244" font-family="ui-monospace, 'DejaVu Sans Mono', monospace" font-size="16" fill="#E03D14">точка на интерес</text>
+
+  <g font-family="'Arial Narrow', 'Liberation Sans Narrow', Impact, sans-serif" font-weight="700">
+    <text x="600" y="566" font-size="104" fill="#FFFFFF" letter-spacing="2"
+          style="paint-order:stroke" stroke="#0E0F11" stroke-width="14">ТУК</text>
+    <text x="600" y="660" font-size="104" fill="#E03D14" letter-spacing="2"
+          style="paint-order:stroke" stroke="#0E0F11" stroke-width="14">ГРЕШИШ</text>
+  </g>
+  <text x="600" y="694" font-family="ui-monospace, 'DejaVu Sans Mono', monospace" font-size="14" fill="#F2EEE6" opacity="0.6" letter-spacing="1">2 ДУМИ · алтернатива за A/B на 48-ия час</text>
+</svg>

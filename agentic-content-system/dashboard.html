@@ -163,6 +163,32 @@
   .p-p1{color:var(--marker)} .p-p2{color:var(--ok)} .p-p3{color:var(--blueprint)}
   .p-p4{color:var(--ice)} .p-p5{color:var(--warn)} .p-a2{color:var(--ink-3)}
 
+  /* ---------- test run ---------- */
+  .verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:0 0 22px}
+  .vcard{border:1px solid var(--line);background:var(--surface);padding:16px 18px 18px;border-top:3px solid var(--line-2)}
+  .vcard--win{border-top-color:var(--ok)} .vcard--fail{border-top-color:var(--marker)}
+  .vcard-id{font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3)}
+  .vcard h3{font-family:var(--display);font-size:18px;font-weight:500;margin:5px 0 10px;letter-spacing:.02em;text-transform:uppercase}
+  .vrow{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:4px 0;border-bottom:1px dotted var(--line)}
+  .vrow:last-of-type{border-bottom:none}
+  .vrow span:first-child{color:var(--ink-3)}
+  .vrow b{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:500}
+  .vgood{color:var(--ok)} .vbad{color:var(--marker)}
+  .vnote{font-size:12.5px;color:var(--ink-2);margin:11px 0 0;line-height:1.5}
+  .flip{border:1px solid var(--line-2);background:var(--surface-2);padding:18px 20px;margin:0 0 22px}
+  .flip-h{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--marker);margin-bottom:10px}
+  .flip-cols{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .flip-cols ol{margin:0;padding-left:22px;font-family:var(--display);font-size:17px;letter-spacing:.02em;line-height:1.8;text-transform:uppercase}
+  .flip-cols li::marker{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+  .flip-lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+  @media (max-width:640px){.flip-cols{grid-template-columns:1fr;gap:16px}}
+  .thumbs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+  .thumb figure{margin:0;border:1px solid var(--line);background:var(--surface)}
+  .thumb svg{display:block;width:100%;height:auto}
+  .thumb figcaption{padding:10px 13px;font-family:var(--mono);font-size:11px;color:var(--ink-3);border-top:1px solid var(--line);line-height:1.5}
+  .thumb figcaption b{color:var(--ink);font-weight:500}
+  .fixrow td:first-child{white-space:nowrap}
+
   /* ---------- ladder ---------- */
   .ladder{display:flex;flex-direction:column-reverse;gap:5px}
   .rung{
@@ -220,7 +246,7 @@
     <div class="tb-eyebrow">
       <span>Mock up · агентска система</span>
       <span>Органичен маркетинг</span>
-      <span>Ревизия 1.0</span>
+      <span>Ревизия 1.1 · след тест</span>
     </div>
     <h1>Система<br><em>Отвес</em></h1>
     <p class="tb-sub">
@@ -513,9 +539,9 @@
 
       <div class="card">
         <div class="card-tag">Short form</div>
-        <div class="card-n">8</div>
+        <div class="card-n">9</div>
         <h3>Формати за къси</h3>
-        <p>Дефектът · Числото · Митът · Протоколът · Историята · Сравнението · Отговорът · Шампионът.</p>
+        <p>Дефектът · Числото · Митът · Протоколът · Историята · Сравнението · Отговорът · Шампионът · <strong>Признанието</strong>.</p>
         <ul>
           <li>Едно твърдение, едно доказателство, един loop</li>
           <li>Хук в първите 1.5 сек, не 3</li>
@@ -637,20 +663,290 @@
         <ul>
           <li><span class="pill p-p1">P1</span> Скритата цена — 30% · форензика</li>
           <li><span class="pill p-p2">P2</span> Терен и парцел — 20% · ПУП, достъп, регулация</li>
-          <li><span class="pill p-p3">P3</span> Investment strategies — 25% · разбор на сделки</li>
-          <li><span class="pill p-p4">P4</span> Световен стандарт — 15% · 10 държави</li>
+          <li><span class="pill p-p3">P3</span> Investment strategies — <s>25%</s> <strong>15%</strong> · разбор на сделки</li>
+          <li><span class="pill p-p4">P4</span> Световен стандарт — <s>15%</s> <strong>25%</strong> · 10 държави</li>
           <li><span class="pill p-p5">P5</span> Шампионският протокол — 10% · човекът</li>
         </ul>
-        <p>80% експертиза, 20% личност. P5 не стои само в отделни епизоди — разпръснат е вътре в експертните.</p>
+        <p>80% експертиза, 20% личност. <strong>Ревизия 1.1</strong> след теста: P4 се вдига, P3 пада — виж секция 04.</p>
         <div class="card-file">00-brand/brand-core.md</div>
       </div>
     </div>
   </section>
 
+
   <!-- 04 -->
-  <section id="growth">
+  <section id="test">
     <div class="sec-head">
       <div class="sec-no">04</div>
+      <h2>Тестово изпълнение · три видеа през целия конвейер</h2>
+      <div class="sec-note">30 дни · 2 снимачни дни</div>
+    </div>
+    <p class="lede">
+      Числата са симулирани. <strong>Правилата, гейтовете и диагнозите не са</strong> — всяко решение долу
+      излиза от таблиците в рамките, не от преценка. Гейт 1 отряза 7 от 11 теми (~84 спестени часа продукция).
+      Гейт 2 хвана една реална червена линия и три жълти.
+    </p>
+
+    <div class="verdict">
+      <div class="vcard vcard--win">
+        <div class="vcard-id">E01 · P1 · форензика</div>
+        <h3>Пукнатината</h3>
+        <div class="vrow"><span>CTR</span><b class="vgood">6.1%</b></div>
+        <div class="vrow"><span>Гледания</span><b>2 513</b></div>
+        <div class="vrow"><span>Задържане</span><b class="vgood">52%</b></div>
+        <div class="vrow"><span>Имейли</span><b>38</b></div>
+        <div class="vrow"><span>Разговори</span><b class="vgood">4</b></div>
+        <p class="vnote">Пакетът и хукът работят. Един спад на 6:10 — блок, който проверката за 90 секунди беше пропуснала.</p>
+      </div>
+      <div class="vcard vcard--fail">
+        <div class="vcard-id">E02 · P3 · симулация</div>
+        <h3>100 000 лв.</h3>
+        <div class="vrow"><span>CTR</span><b class="vgood">8.1%</b></div>
+        <div class="vrow"><span>Гледания</span><b>6 390</b></div>
+        <div class="vrow"><span>Задържане</span><b class="vbad">34%</b></div>
+        <div class="vrow"><span>Имейли</span><b class="vbad">12</b></div>
+        <div class="vrow"><span>Разговори</span><b class="vbad">3</b></div>
+        <p class="vnote">Най-високо CTR, най-лош резултат. Обещанието от заглавието се плащаше на 9:00 от 16 минути.</p>
+      </div>
+      <div class="vcard vcard--win">
+        <div class="vcard-id">E03 · P4 · 10 държави</div>
+        <h3>Световен стандарт</h3>
+        <div class="vrow"><span>CTR</span><b class="vgood">5.4%</b></div>
+        <div class="vrow"><span>Гледания</span><b>1 825</b></div>
+        <div class="vrow"><span>Задържане</span><b class="vgood">58%</b></div>
+        <div class="vrow"><span>Имейли</span><b class="vgood">41</b></div>
+        <div class="vrow"><span>Разговори</span><b class="vgood">6</b></div>
+        <p class="vnote">Най-малко гледания, най-много резултат. Няма случайни зрители — който гледа 12 минути за строителни стандарти, вече мисли да купува.</p>
+      </div>
+    </div>
+
+    <div class="flip">
+      <div class="flip-h">Двете класации са обърнати</div>
+      <div class="flip-cols">
+        <div>
+          <div class="flip-lab">По гледания</div>
+          <ol><li>E02 — 6 390</li><li>E01 — 2 513</li><li>E03 — 1 825</li></ol>
+        </div>
+        <div>
+          <div class="flip-lab">По квалифицирани разговори</div>
+          <ol><li>E03 — 6</li><li>E01 — 4</li><li>E02 — 3</li></ol>
+        </div>
+      </div>
+      <p class="vnote" style="margin-top:16px;max-width:78ch">
+        Ако Северната звезда бяха гледанията, системата щеше да заключи, че симулациите с капитал са
+        печелившият формат — и следващият месец щеше да е четири E02-ки.
+        Това е единствената причина метриката да е „квалифицирани разговори", а не нещо по-приятно за гледане.
+        Същото се повтори и при shorts: A18 направи 94 000 гледания и 9 имейла; A03 направи 14 000 гледания и 34 имейла.
+      </p>
+    </div>
+
+    <h3 style="font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.03em;font-size:20px;margin:34px 0 6px">Какво се счупи</h3>
+    <div class="tw" style="margin-bottom:26px">
+      <table>
+        <thead><tr><th>Проблем</th><th>Къде</th><th>Поправката</th></tr></thead>
+        <tbody>
+          <tr><td>Неплатено обещание</td><td>E02 — payoff на 56% от дължината</td><td>Ново правило: обещанието се плаща в първите <strong>25%</strong>. Влиза в Definition of Done.</td></tr>
+          <tr><td>Обещание за доходност 🔴</td><td>E02 @ 11:40 — „излизаш на около 12% годишно“</td><td>Спряно от Гейт 2. Пренаписано като реализиран резултат от конкретна минала сделка + дисклеймър.</td></tr>
+          <tr><td>Избирателна проверка</td><td>E01 — спад на 6:10</td><td>Проверката за 90 секунди става автоматична на <strong>всеки</strong> блок, не по преценка.</td></tr>
+          <tr><td>Архивът е тясното място</td><td>E03 зависи от кадри, които не се правят наново</td><td>Инвентаризация на архива — най-висок приоритет за Агент 01.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.03em;font-size:20px;margin:0 0 6px">Седемте промени, които системата направи сама</h3>
+    <p class="lede" style="margin-bottom:14px">
+      Нито една не е измислена — всичките излизат от диагностичната таблица, приложена върху данните.
+      И всичките са <strong>приложени в самите файлове</strong>, не само описани в отчета.
+    </p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Промяна</th><th>От какво</th><th>Къде влезе</th></tr></thead>
+        <tbody class="fixrow">
+          <tr><td>Payoff в първите 25%</td><td>E02</td><td><code>05-longform-architect.md</code></td></tr>
+          <tr><td>Автоматична проверка за 90 сек</td><td>E01 спад на 6:10</td><td><code>05-longform-architect.md</code></td></tr>
+          <tr><td>Нов short формат S9 „Признанието“</td><td>A18 — 94 000 гледания</td><td><code>shorts-frameworks.md</code></td></tr>
+          <tr><td>P4 15% → 25%, P3 25% → 15%</td><td>E03 срещу E02</td><td><code>brand-core.md</code></td></tr>
+          <tr><td>Мин. 2 × S4 „Протоколът“ седмично</td><td>A03 — 4× повече имейли</td><td><code>08-shorts-factory.md</code></td></tr>
+          <tr><td>Инвентаризация на архива</td><td>P4 зависи от материал, който не се произвежда</td><td><code>01-research-radar.md</code></td></tr>
+          <tr><td>E02R преиздание с нова структура</td><td>тест на правилото за 25%</td><td><code>longform-concepts.md</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.03em;font-size:20px;margin:34px 0 6px">Композиционни макети</h3>
+    <p class="lede" style="margin-bottom:14px">
+      Не финална графика — <strong>композиция</strong>. Разположение на кадрите, зона на лицето,
+      реален текст в реален размер, един акцентен цвят. Такъв макет се дава на дизайнер и на оператор едновременно.
+    </p>
+    <div class="thumbs">
+      <div class="thumb"><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="Композиционен макет E01 TC-1">
+  <defs><pattern id="h1" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+  <line x1="0" y1="0" x2="0" y2="20" stroke="#FFFFFF" stroke-opacity="0.045" stroke-width="9"/></pattern></defs>
+  <rect width="1280" height="720" fill="#4E4B46"/>
+
+  <rect x="0" y="0" width="768" height="720" fill="#726D64"/>
+  <rect x="0" y="0" width="768" height="720" fill="url(#h1)"/>
+  <line x1="0" y1="0" x2="768" y2="720" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="2"/>
+  <line x1="768" y1="0" x2="0" y2="720" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="2"/>
+  <g font-family="ui-monospace, 'DejaVu Sans Mono', monospace" fill="#F1EDE5" text-anchor="middle">
+    <text x="384" y="76" font-size="19" letter-spacing="3" opacity="0.8">КАДЪР A · 60%</text>
+    <text x="384" y="112" font-size="26" font-weight="700">МАКРО · ПУКНАТИНА</text>
+    <text x="384" y="146" font-size="17" opacity="0.72">носеща стена · естествена светлина</text>
+    <text x="384" y="172" font-size="17" opacity="0.72">3 ъгъла · без светкавица</text>
+  </g>
+  <ellipse cx="384" cy="360" rx="126" ry="152" fill="none" stroke="#E03D14" stroke-width="11"/>
+  <text x="384" y="546" font-family="ui-monospace, 'DejaVu Sans Mono', monospace" font-size="16" fill="#E03D14" text-anchor="middle" letter-spacing="2">OVERLAY · маркер</text>
+
+  <rect x="768" y="0" width="512" height="720" fill="#22262A"/>
+  <rect x="768" y="0" width="512" height="720" fill="url(#h1)"/>
+  <line x1="768" y1="0" x2="1280" y2="720" stroke="#FFFFFF" stroke-opacity="0.07" stroke-width="2"/>
+  <line x1="1280" y1="0" x2="768" y2="720" stroke="#FFFFFF" stroke-opacity="0.07" stroke-width="2"/>
+  <rect x="872" y="112" width="304" height="340" fill="none" stroke="#5C8CA0" stroke-width="2" stroke-dasharray="9 7"/>
+  <line x1="872" y1="248" x2="1176" y2="248" stroke="#5C8CA0" stroke-width="2" stroke-dasharray="4 6"/>
+  <g font-family="ui-monospace, 'DejaVu Sans Mono', monospace" fill="#DFE5E8" text-anchor="middle">
+    <text x="1024" y="76" font-size="19" letter-spacing="3" opacity="0.8">КАДЪР B · 40%</text>
+    <text x="1024" y="326" font-size="24" font-weight="700">ПОРТРЕТ 85mm</text>
+    <text x="1024" y="360" font-size="16" opacity="0.72">поглед към дефекта,</text>
+    <text x="1024" y="386" font-size="16" opacity="0.72">не в камерата</text>
+    <text x="1024" y="418" font-size="16" opacity="0.72">вежди леко свити</text>
+    <text x="1024" y="486" font-size="14" fill="#5C8CA0" opacity="1">зона на лицето · 33%</text>
+    <text x="1024" y="232" font-size="13" fill="#5C8CA0">линия на очите · горна трета</text>
+  </g>
+
+  <g font-family="'Arial Narrow', 'Liberation Sans Narrow', Impact, sans-serif" font-weight="700">
+    <text x="48" y="682" font-size="126" fill="#FFFFFF" letter-spacing="-2"
+          style="paint-order:stroke" stroke="#0E0F11" stroke-width="14">38 000</text>
+    <text x="536" y="682" font-size="74" fill="#E03D14"
+          style="paint-order:stroke" stroke="#0E0F11" stroke-width="11">ЛВ.</text>
+  </g>
+  <text x="48" y="712" font-family="ui-monospace, 'DejaVu Sans Mono', monospace" font-size="14" fill="#E9E4DA" opacity="0.65" letter-spacing="1">1 ЧИСЛО + 1 ДУМА · тест на 10% ✓</text>
+</svg><figcaption><b>E01 · TC-1</b> — архетип T1, дефектът в едър план. Пуска се първи.</figcaption></figure></div>
+      <div class="thumb"><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="Композиционен макет E01 TC-3">
+  <defs><pattern id="h2" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+  <line x1="0" y1="0" x2="0" y2="20" stroke="#FFFFFF" stroke-opacity="0.045" stroke-width="9"/></pattern></defs>
+  <rect width="1280" height="720" fill="#5B5852"/>
+  <rect width="1280" height="720" fill="url(#h2)"/>
+  <line x1="0" y1="0" x2="1280" y2="720" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="2"/>
+  <line x1="1280" y1="0" x2="0" y2="720" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="2"/>
+
+  <g font-family="ui-monospace, 'DejaVu Sans Mono', monospace" fill="#F2EEE6">
+    <text x="56" y="72" font-size="19" letter-spacing="3" opacity="0.8">ЕДИН КАДЪР · 100%</text>
+    <text x="56" y="110" font-size="27" font-weight="700">ТОЙ СОЧИ ДЕФЕКТА</text>
+    <text x="56" y="142" font-size="17" opacity="0.72">поглед В КАМЕРАТА · тяло към стената</text>
+    <text x="56" y="168" font-size="17" opacity="0.72">апартаментът разфокусиран отзад</text>
+  </g>
+
+  <rect x="110" y="214" width="400" height="440" fill="none" stroke="#5C8CA0" stroke-width="2" stroke-dasharray="9 7"/>
+  <text x="120" y="242" font-family="ui-monospace, 'DejaVu Sans Mono', monospace" font-size="15" fill="#5C8CA0">фигура · лице 34%</text>
+  <path d="M512 434 L916 244" fill="none" stroke="#5C8CA0" stroke-width="3" stroke-dasharray="10 8"/>
+  <circle cx="930" cy="238" r="32" fill="none" stroke="#E03D14" stroke-width="7"/>
+  <text x="972" y="244" font-family="ui-monospace, 'DejaVu Sans Mono', monospace" font-size="16" fill="#E03D14">точка на интерес</text>
+
+  <g font-family="'Arial Narrow', 'Liberation Sans Narrow', Impact, sans-serif" font-weight="700">
+    <text x="600" y="566" font-size="104" fill="#FFFFFF" letter-spacing="2"
+          style="paint-order:stroke" stroke="#0E0F11" stroke-width="14">ТУК</text>
+    <text x="600" y="660" font-size="104" fill="#E03D14" letter-spacing="2"
+          style="paint-order:stroke" stroke="#0E0F11" stroke-width="14">ГРЕШИШ</text>
+  </g>
+  <text x="600" y="694" font-family="ui-monospace, 'DejaVu Sans Mono', monospace" font-size="14" fill="#F2EEE6" opacity="0.6" letter-spacing="1">2 ДУМИ · алтернатива за A/B на 48-ия час</text>
+</svg><figcaption><b>E01 · TC-3</b> — архетип T8, посочването. Резерва за A/B на 48-ия час.</figcaption></figure></div>
+      <div class="thumb"><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="Композиционен макет E02 TC-2">
+  <defs><pattern id="h3" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+  <line x1="0" y1="0" x2="0" y2="20" stroke="#FFFFFF" stroke-opacity="0.045" stroke-width="9"/></pattern></defs>
+  <rect width="1280" height="720" fill="#15181B"/>
+  <g opacity="0.38" stroke="#1E4C69" stroke-width="1.5" fill="none">
+    <path d="M0 120 H1280 M0 240 H1280 M0 360 H1280 M0 480 H1280 M0 600 H1280"/>
+    <path d="M160 0 V720 M320 0 V720 M480 0 V720 M640 0 V720 M800 0 V720 M960 0 V720 M1120 0 V720"/>
+  </g>
+
+  <rect x="40" y="130" width="392" height="590" fill="#262B2F"/>
+  <rect x="40" y="130" width="392" height="590" fill="url(#h3)"/>
+  <line x1="40" y1="130" x2="432" y2="720" stroke="#FFFFFF" stroke-opacity="0.07" stroke-width="2"/>
+  <line x1="432" y1="130" x2="40" y2="720" stroke="#FFFFFF" stroke-opacity="0.07" stroke-width="2"/>
+  <g font-family="ui-monospace, 'DejaVu Sans Mono', monospace" fill="#DFE5E8" text-anchor="middle">
+    <text x="236" y="286" font-size="18" letter-spacing="3" opacity="0.8">КАДЪР A · 30%</text>
+    <text x="236" y="322" font-size="24" font-weight="700">ПОРТРЕТ</text>
+    <text x="236" y="356" font-size="16" opacity="0.72">поглед в камерата</text>
+    <text x="236" y="382" font-size="16" opacity="0.72">спокойна увереност</text>
+  </g>
+
+  <rect x="700" y="88" width="520" height="368" fill="#E9E5DD"/>
+  <g stroke="#2B2E31" stroke-width="8" stroke-linecap="round" fill="none">
+    <path d="M746 190 H902"/><path d="M746 292 H1006"/><path d="M746 394 H864"/>
+  </g>
+  <path d="M1052 282 l30 34 l58 -78" stroke="#C2481A" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <text x="746" y="140" font-family="ui-monospace, 'DejaVu Sans Mono', monospace" font-size="17" fill="#5A5751" letter-spacing="2">КАДЪР B · 3 ОПЦИИ, 1 ИЗБРАНА</text>
+
+  <g font-family="'Arial Narrow', 'Liberation Sans Narrow', Impact, sans-serif" font-weight="700">
+    <text x="470" y="662" font-size="164" fill="#FFFFFF" letter-spacing="-5"
+          style="paint-order:stroke" stroke="#0A0C0E" stroke-width="16">100 000</text>
+  </g>
+  <text x="470" y="700" font-family="ui-monospace, 'DejaVu Sans Mono', monospace" font-size="15" fill="#5C8CA0" letter-spacing="2">1 ЧИСЛО · 0 ДУМИ · тъмен фон, светло число</text>
+</svg><figcaption><b>E02 · TC-2</b> — архетип T2, лице + число. Събра 8.1% CTR — thumbnail-ът не е проблемът тук.</figcaption></figure></div>
+      <div class="thumb"><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="Композиционен макет E03 TC-1">
+  <defs><pattern id="h4" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+  <line x1="0" y1="0" x2="0" y2="20" stroke="#FFFFFF" stroke-opacity="0.045" stroke-width="9"/></pattern></defs>
+  <rect width="1280" height="720" fill="#1B1F22"/>
+  <g font-family="ui-monospace, 'DejaVu Sans Mono', monospace" fill="#D9DFE2" text-anchor="middle">
+    <rect x="0" y="0" width="320" height="360" fill="#40484D"/><rect x="0" y="0" width="320" height="360" fill="url(#h4)"/>
+    <text x="160" y="166" font-size="17" opacity="0.8">АРХИВЕН КАДЪР 1</text>
+    <text x="160" y="198" font-size="22" font-weight="700">ГЕРМАНИЯ</text>
+    <rect x="960" y="0" width="320" height="360" fill="#4E463C"/><rect x="960" y="0" width="320" height="360" fill="url(#h4)"/>
+    <text x="1120" y="166" font-size="17" opacity="0.8">АРХИВЕН КАДЪР 2</text>
+    <text x="1120" y="198" font-size="22" font-weight="700">ДУБАЙ</text>
+    <rect x="0" y="360" width="320" height="360" fill="#38464C"/><rect x="0" y="360" width="320" height="360" fill="url(#h4)"/>
+    <text x="160" y="526" font-size="17" opacity="0.8">АРХИВЕН КАДЪР 3</text>
+    <text x="160" y="558" font-size="22" font-weight="700">НОРВЕГИЯ</text>
+    <rect x="960" y="360" width="320" height="360" fill="#463F38"/><rect x="960" y="360" width="320" height="360" fill="url(#h4)"/>
+    <text x="1120" y="526" font-size="17" opacity="0.8">АРХИВЕН КАДЪР 4</text>
+    <text x="1120" y="558" font-size="22" font-weight="700">БЪЛГАРИЯ</text>
+  </g>
+
+  <rect x="320" y="0" width="640" height="720" fill="#171B1E"/>
+  <rect x="416" y="96" width="448" height="624" fill="#252A2E"/>
+  <rect x="416" y="96" width="448" height="624" fill="url(#h4)"/>
+  <line x1="416" y1="96" x2="864" y2="720" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="2"/>
+  <line x1="864" y1="96" x2="416" y2="720" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="2"/>
+  <g font-family="ui-monospace, 'DejaVu Sans Mono', monospace" fill="#DFE5E8" text-anchor="middle">
+    <text x="640" y="182" font-size="18" letter-spacing="3" opacity="0.8">ЦЕНТРАЛЕН КАДЪР · 35%</text>
+    <text x="640" y="220" font-size="23" font-weight="700">ПОРТРЕТ · ГРЪДЕН ПЛАН</text>
+    <text x="640" y="252" font-size="16" opacity="0.72">поглед в камерата · без усмивка</text>
+    <text x="640" y="278" font-size="16" opacity="0.72">неутрална риза, без лого</text>
+  </g>
+
+  <g font-family="'Arial Narrow', 'Liberation Sans Narrow', Impact, sans-serif" font-weight="700" text-anchor="middle">
+    <text x="640" y="588" font-size="118" fill="#FFFFFF" letter-spacing="-1"
+          style="paint-order:stroke" stroke="#0A0C0E" stroke-width="15">10</text>
+    <text x="640" y="664" font-size="62" fill="#E8813F" letter-spacing="5"
+          style="paint-order:stroke" stroke="#0A0C0E" stroke-width="11">ДЪРЖАВИ</text>
+  </g>
+  <text x="640" y="700" font-family="ui-monospace, 'DejaVu Sans Mono', monospace" font-size="14" fill="#D9DFE2" opacity="0.6" text-anchor="middle" letter-spacing="1">1 ЧИСЛО + 1 ДУМА</text>
+</svg><figcaption><b>E03 · TC-1</b> — архетип T10, флаговете. Изисква архив; без него темата се отлага.</figcaption></figure></div>
+    </div>
+
+    <div class="callout" style="margin-top:26px">
+      <h3>Какво тестът не доказва</h3>
+      <p>
+        Няма заснет кадър и числата са модел. Тестът показва, че конвейерът произвежда пълни, изпълними
+        изходи и че диагностиката хваща грешки — не че тези конкретни видеа ще направят тези конкретни числа.
+      </p>
+      <p>
+        Четири неща се тестват само на терен: дали партньорът звучи естествено, когато чете структура вместо текст;
+        дали 15 shorts на седмица издържат до месец 6, а не само до месец 1; дали Atlanta пуска реални числа с реална скорост;
+        и дали квалифицираните разговори стават сделки — това се вижда чак на месец 4–6.
+      </p>
+      <p>
+        <strong>Най-големият риск, който тестът показа, не е в съдържанието.</strong> В архива и в достъпа до обекти е.
+        Двата най-силни формата зависят от материал, който не може да се произведе в студио.
+        Ако партньорът спре да ходи по обекти, системата спира да работи — колкото и добри да са шаблоните.
+      </p>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section id="growth">
+    <div class="sec-head">
+      <div class="sec-no">05</div>
       <h2>Растеж · YouTube първо, после IG и FB</h2>
       <div class="sec-note">90-дневен план</div>
     </div>
@@ -717,7 +1013,7 @@
   <!-- 05 -->
   <section id="money">
     <div class="sec-head">
-      <div class="sec-no">05</div>
+      <div class="sec-no">06</div>
       <h2>Монетизация · седем нива до фонда</h2>
       <div class="sec-note">Доверието е активът</div>
     </div>
@@ -774,7 +1070,7 @@
   <!-- 06 -->
   <section id="compliance">
     <div class="sec-head">
-      <div class="sec-no">06</div>
+      <div class="sec-no">07</div>
       <h2>Гейт 2 · защо агент 10 не е украса</h2>
       <div class="sec-note">Hard stop</div>
     </div>
@@ -807,7 +1103,7 @@
   <!-- 07 -->
   <section id="files">
     <div class="sec-head">
-      <div class="sec-no">07</div>
+      <div class="sec-no">08</div>
       <h2>Къде е кое</h2>
       <div class="sec-note">31 файла</div>
     </div>
@@ -834,7 +1130,7 @@
   </section>
 
   <footer class="foot">
-    <div>Система Отвес · ревизия 1.0 · mock up</div>
+    <div>Система Отвес · ревизия 1.1 · тествана веднъж</div>
     <div>Рамки: Sam Gaudet · Caleb Ralston — адаптирани за BG пазар</div>
     <div>Гейт 2 подлежи на юридически преглед преди старт</div>
   </footer>

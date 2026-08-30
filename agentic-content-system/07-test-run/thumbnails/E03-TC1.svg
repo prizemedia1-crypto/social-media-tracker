@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-label="Композиционен макет E03 TC-1">
+  <defs><pattern id="h4" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+  <line x1="0" y1="0" x2="0" y2="20" stroke="#FFFFFF" stroke-opacity="0.045" stroke-width="9"/></pattern></defs>
+  <rect width="1280" height="720" fill="#1B1F22"/>
+  <g font-family="ui-monospace, 'DejaVu Sans Mono', monospace" fill="#D9DFE2" text-anchor="middle">
+    <rect x="0" y="0" width="320" height="360" fill="#40484D"/><rect x="0" y="0" width="320" height="360" fill="url(#h4)"/>
+    <text x="160" y="166" font-size="17" opacity="0.8">АРХИВЕН КАДЪР 1</text>
+    <text x="160" y="198" font-size="22" font-weight="700">ГЕРМАНИЯ</text>
+    <rect x="960" y="0" width="320" height="360" fill="#4E463C"/><rect x="960" y="0" width="320" height="360" fill="url(#h4)"/>
+    <text x="1120" y="166" font-size="17" opacity="0.8">АРХИВЕН КАДЪР 2</text>
+    <text x="1120" y="198" font-size="22" font-weight="700">ДУБАЙ</text>
+    <rect x="0" y="360" width="320" height="360" fill="#38464C"/><rect x="0" y="360" width="320" height="360" fill="url(#h4)"/>
+    <text x="160" y="526" font-size="17" opacity="0.8">АРХИВЕН КАДЪР 3</text>
+    <text x="160" y="558" font-size="22" font-weight="700">НОРВЕГИЯ</text>
+    <rect x="960" y="360" width="320" height="360" fill="#463F38"/><rect x="960" y="360" width="320" height="360" fill="url(#h4)"/>
+    <text x="1120" y="526" font-size="17" opacity="0.8">АРХИВЕН КАДЪР 4</text>
+    <text x="1120" y="558" font-size="22" font-weight="700">БЪЛГАРИЯ</text>
+  </g>
+
+  <rect x="320" y="0" width="640" height="720" fill="#171B1E"/>
+  <rect x="416" y="96" width="448" height="624" fill="#252A2E"/>
+  <rect x="416" y="96" width="448" height="624" fill="url(#h4)"/>
+  <line x1="416" y1="96" x2="864" y2="720" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="2"/>
+  <line x1="864" y1="96" x2="416" y2="720" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="2"/>
+  <g font-family="ui-monospace, 'DejaVu Sans Mono', monospace" fill="#DFE5E8" text-anchor="middle">
+    <text x="640" y="182" font-size="18" letter-spacing="3" opacity="0.8">ЦЕНТРАЛЕН КАДЪР · 35%</text>
+    <text x="640" y="220" font-size="23" font-weight="700">ПОРТРЕТ · ГРЪДЕН ПЛАН</text>
+    <text x="640" y="252" font-size="16" opacity="0.72">поглед в камерата · без усмивка</text>
+    <text x="640" y="278" font-size="16" opacity="0.72">неутрална риза, без лого</text>
+  </g>
+
+  <g font-family="'Arial Narrow', 'Liberation Sans Narrow', Impact, sans-serif" font-weight="700" text-anchor="middle">
+    <text x="640" y="588" font-size="118" fill="#FFFFFF" letter-spacing="-1"
+          style="paint-order:stroke" stroke="#0A0C0E" stroke-width="15">10</text>
+    <text x="640" y="664" font-size="62" fill="#E8813F" letter-spacing="5"
+          style="paint-order:stroke" stroke="#0A0C0E" stroke-width="11">ДЪРЖАВИ</text>
+  </g>
+  <text x="640" y="700" font-family="ui-monospace, 'DejaVu Sans Mono', monospace" font-size="14" fill="#D9DFE2" opacity="0.6" text-anchor="middle" letter-spacing="1">1 ЧИСЛО + 1 ДУМА</text>
+</svg>

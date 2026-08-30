@@ -1,11 +1,27 @@
 {
-  "$comment": "Mock състояние на конвейера — това е държавата, която Агент 00 чете и пише при всяко изпълнение.",
-  "cycle": "2026-09",
-  "brand_version": "1.0",
-  "north_star": { "metric": "qualified_conversations", "target": 15, "actual": 11 },
+  "$comment": "Състояние на конвейера СЛЕД тестовото изпълнение (07-test-run). Числата са симулирани; правилата и диагнозите са реални.",
+  "cycle": "2026-09 · ЗАТВОРЕН",
+  "brand_version": "1.1",
+  "north_star": {
+    "metric": "qualified_conversations",
+    "target": 5,
+    "actual": 13,
+    "note": "цел за месец 1 надмината 2.6×"
+  },
   "gates": {
-    "gate_1_packaging": { "owner": "03-packaging-agent", "passed": 4, "killed": 7 },
-    "gate_2_compliance": { "owner": "10-compliance-agent", "green": 58, "amber": 3, "red": 1 }
+    "gate_1_packaging": {
+      "owner": "03-packaging-agent",
+      "passed": 4,
+      "killed": 7,
+      "hours_saved_est": 84
+    },
+    "gate_2_compliance": {
+      "owner": "10-compliance-agent",
+      "green": 58,
+      "amber": 3,
+      "red": 1,
+      "red_detail": "E02 @ 11:40 — 'излизаш на около дванайсет процента годишно'. Прогнозна доходност. Пренаписано като реализиран резултат от конкретна минала сделка + дисклеймър."
+    }
   },
   "longform": [
     {
@@ -14,13 +30,27 @@
       "pillar": "P1",
       "template": "PT1",
       "hook": "H1",
-      "thumbnail": { "archetype": "T1", "text": "38 000 лв.", "variants": 3, "chosen": "TC-1" },
+      "thumbnail": {
+        "archetype": "T1",
+        "text": "38 000 лв.",
+        "variants": 3,
+        "chosen": "TC-1"
+      },
       "status": "published",
       "published_at": "2026-09-03T19:00:00+03:00",
-      "metrics": { "impressions": 41200, "ctr": 0.061, "views": 2513, "avd_pct": 0.52, "qualified_conversations": 4 },
+      "metrics": {
+        "impressions": 41200,
+        "ctr": 0.061,
+        "views": 2513,
+        "avd_pct": 0.52,
+        "retention_30s": 0.71,
+        "emails": 38,
+        "qualified_conversations": 4,
+        "audits_booked": 1
+      },
       "shorts_yield": 6,
       "cta": "checklist_7_proverki",
-      "compliance": "GREEN"
+      "compliance": "GREEN (след 2 корекции)"
     },
     {
       "id": "E02",
@@ -28,14 +58,28 @@
       "pillar": "P3",
       "template": "PT6",
       "hook": "H12",
-      "thumbnail": { "archetype": "T2", "text": "100 000", "variants": 3, "chosen": "TC-2" },
+      "thumbnail": {
+        "archetype": "T2",
+        "text": "100 000",
+        "variants": 3,
+        "chosen": "TC-2"
+      },
       "status": "published",
       "published_at": "2026-09-10T19:00:00+03:00",
-      "metrics": { "impressions": 78900, "ctr": 0.081, "views": 6390, "avd_pct": 0.34, "qualified_conversations": 3 },
+      "metrics": {
+        "impressions": 78900,
+        "ctr": 0.081,
+        "views": 6390,
+        "avd_pct": 0.34,
+        "retention_30s": 0.74,
+        "retention_5min": 0.41,
+        "emails": 12,
+        "qualified_conversations": 3
+      },
       "shorts_yield": 7,
       "cta": "subscribe_next_video",
-      "compliance": "GREEN",
-      "flag": "OVERPROMISE — CTR 8.1% при AVD 34%. Агент 11: заглавието обещава повече, отколкото видеото плаща. Агент 03 да смекчи; Агент 05 да премести payoff-а от 9:00 на 4:30."
+      "compliance": "GREEN (след 1 RED корекция)",
+      "flag": "РЕШЕНО — неплатено обещание. Payoff беше на 9:00 от 16 мин (56%). Ново правило: обещанието се плаща преди 25%. Влиза в Definition of Done. E02R преиздава след 60 дни."
     },
     {
       "id": "E03",
@@ -43,11 +87,28 @@
       "pillar": "P4",
       "template": "PT3",
       "hook": "H10",
-      "thumbnail": { "archetype": "T10", "text": "10 ДЪРЖАВИ", "variants": 3, "chosen": "TC-1" },
-      "status": "in_edit",
+      "thumbnail": {
+        "archetype": "T10",
+        "text": "10 ДЪРЖАВИ",
+        "variants": 3,
+        "chosen": "TC-1"
+      },
+      "status": "published",
       "shorts_yield": 8,
       "cta": "checklist_7_proverki",
-      "compliance": "GREEN"
+      "compliance": "GREEN (след 1 корекция)",
+      "published_at": "2026-09-17T19:00:00+03:00",
+      "metrics": {
+        "impressions": 33800,
+        "ctr": 0.054,
+        "views": 1825,
+        "avd_pct": 0.58,
+        "retention_30s": 0.76,
+        "emails": 41,
+        "qualified_conversations": 6,
+        "best_short_views": 94000
+      },
+      "flag": "НАЙ-ДОБРО СЪОТНОШЕНИЕ. Най-малко гледания, най-много разговори. P4 се вдига 15% → 25%."
     },
     {
       "id": "E04",
@@ -55,32 +116,104 @@
       "pillar": "P5",
       "template": "PT8",
       "hook": "H11",
-      "thumbnail": { "archetype": "T5", "text": "130 км/ч", "variants": 3, "chosen": null },
-      "status": "scripted",
+      "thumbnail": {
+        "archetype": "T5",
+        "text": "130 км/ч",
+        "variants": 3,
+        "chosen": null
+      },
+      "status": "deferred",
       "shorts_yield": 5,
       "cta": "instagram",
-      "compliance": "PENDING"
+      "compliance": "PENDING",
+      "flag": "Отложено — партньорът беше в чужбина 9 дни. Буферът от 6 shorts покри седмицата. Първи успешен тест на кризисния протокол."
     }
   ],
-  "shorts": { "planned": 60, "produced": 47, "published": 41, "buffer": 6, "blocked_by_compliance": 1 },
-  "blocked": [
-    {
-      "asset": "B-EXTRA-03",
-      "reason": "RED — клипът съдържа изречението 'тази стратегия дава сигурни 12% годишно'. Обещание за доходност.",
-      "action": "Пренаписване: показва се реализирана доходност от минала сделка + дисклеймър. Изпратено на Агент 07.",
-      "owner": "10-compliance-agent"
+  "shorts": {
+    "planned": 60,
+    "produced": 54,
+    "published": 54,
+    "buffer_used": 6,
+    "blocked_by_compliance": 1,
+    "top": {
+      "id": "A18",
+      "format": "S9",
+      "views": 94000,
+      "shares": 1200,
+      "subs": 610
+    },
+    "highest_value": {
+      "id": "A03",
+      "format": "S4",
+      "views": 14000,
+      "emails": 34,
+      "note": "7× по-малко гледания, ~4× повече имейли от A18"
     }
-  ],
+  },
+  "blocked": [],
   "decisions_for_cd": [
     {
-      "question": "E02 има високо CTR и слабо задържане. Смекчаваме ли заглавието (губим ~2% CTR) или пренаписваме структурата?",
-      "recommendation": "Пренапиши структурата, задръж заглавието. Обещанието е добро — доставката закъснява. Премести сметката от 9:00 на 4:30.",
-      "cost_of_delay": "Всяка седмица с AVD 34% учи алгоритъма, че каналът не задържа."
+      "question": "Инвентаризацията на архива блокира вдигането на P4 до 25%. Правим ли я преди месец 2, или държим P4 на 15%, докато стане?",
+      "recommendation": "Направи я тази седмица. Два часа с телефон и стар хард диск. P4 е най-резултатният формат в теста и е единственият, който никой конкурент не може да копира.",
+      "cost_of_delay": "Всеки месец на 15% P4 е ~3 пропуснати квалифицирани разговора."
+    },
+    {
+      "question": "E02R: преиздаваме ли със същото заглавие, или сменяме и него?",
+      "recommendation": "Същото заглавие. То събра 8.1% CTR — не то е грешката. Ако сменим и двете, няма да знаем кое е поправило нещата.",
+      "cost_of_delay": "нисък"
     },
     {
       "question": "Гост за E24: нотариус или оценител?",
       "recommendation": "Нотариус. По-висок search обем, по-ясна болка, по-лесно се нарязва на shorts.",
       "cost_of_delay": "нисък"
+    }
+  ],
+  "month_totals": {
+    "longform_views": 10728,
+    "shorts_views": 312000,
+    "new_subscribers": 1840,
+    "emails": 91,
+    "qualified_conversations": 13,
+    "audits_booked": 3,
+    "revenue_bgn": 1800,
+    "leads_to_atlanta": 2,
+    "shoot_days": 2
+  },
+  "system_changes_applied": [
+    {
+      "change": "Правило: обещанието от заглавието се плаща в първите 25%",
+      "from": "E02",
+      "file": "01-agents/05-longform-architect.md"
+    },
+    {
+      "change": "Проверката за 90 сек става автоматична на всеки блок",
+      "from": "E01 спад на 6:10",
+      "file": "01-agents/05-longform-architect.md"
+    },
+    {
+      "change": "Нов short формат S9 Признанието",
+      "from": "A18 — 94 000 гледания",
+      "file": "02-frameworks/shorts-frameworks.md"
+    },
+    {
+      "change": "P4 15% → 25%, P3 25% → 15%",
+      "from": "E03 vs E02",
+      "file": "00-brand/brand-core.md"
+    },
+    {
+      "change": "Минимум 2 × S4 Протоколът на седмица",
+      "from": "A03 — 4× повече имейли",
+      "file": "01-agents/08-shorts-factory.md"
+    },
+    {
+      "change": "Инвентаризация на архива — най-висок приоритет",
+      "from": "P4 зависи от материал, който не се произвежда наново",
+      "file": "01-agents/01-research-radar.md"
+    },
+    {
+      "change": "E02R преиздание като 10%-ен експеримент",
+      "from": "тест на правилото за 25%",
+      "file": "03-content-bank/longform-concepts.md"
     }
   ]
 }

@@ -1,0 +1,841 @@
+<title>Система Отвес</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --ground:#E3E2DD;
+    --surface:#F1F0EC;
+    --surface-2:#DBDAD4;
+    --ink:#17191B;
+    --ink-2:#4B4F52;
+    --ink-3:#7A7E80;
+    --line:#C3C2BB;
+    --line-2:#A9A8A0;
+    --blueprint:#1E4C69;
+    --blueprint-soft:#D6E1E8;
+    --marker:#C2481A;
+    --marker-soft:#F0DBD1;
+    --ice:#5C8CA0;
+    --ok:#3A6B47;
+    --warn:#96681A;
+    --shadow:0 1px 0 rgba(23,25,27,.06);
+    --display:"Oswald","Arial Narrow",system-ui,sans-serif;
+    --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#131517;
+      --surface:#1B1E20;
+      --surface-2:#24282A;
+      --ink:#E7E5E0;
+      --ink-2:#ABAFB1;
+      --ink-3:#7C8082;
+      --line:#2E3336;
+      --line-2:#414749;
+      --blueprint:#7BB0CE;
+      --blueprint-soft:#1C3242;
+      --marker:#E87A44;
+      --marker-soft:#3A2117;
+      --ice:#86AEBF;
+      --ok:#6FA57E;
+      --warn:#C99B44;
+      --shadow:0 1px 0 rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#131517;
+    --surface:#1B1E20;
+    --surface-2:#24282A;
+    --ink:#E7E5E0;
+    --ink-2:#ABAFB1;
+    --ink-3:#7C8082;
+    --line:#2E3336;
+    --line-2:#414749;
+    --blueprint:#7BB0CE;
+    --blueprint-soft:#1C3242;
+    --marker:#E87A44;
+    --marker-soft:#3A2117;
+    --ice:#86AEBF;
+    --ok:#6FA57E;
+    --warn:#C99B44;
+    --shadow:0 1px 0 rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:15px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sheet{max-width:1180px;margin:0 auto;padding:0 24px 100px}
+
+  /* ---------- title block ---------- */
+  .titleblock{
+    border-bottom:2px solid var(--ink);
+    padding:38px 0 0;
+    margin-bottom:44px;
+  }
+  .tb-eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--marker);display:flex;gap:14px;flex-wrap:wrap;align-items:center;
+  }
+  .tb-eyebrow span:not(:last-child)::after{content:"";display:inline-block;width:1px;height:10px;background:var(--line-2);margin-left:14px;vertical-align:-1px}
+  h1{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(52px,10vw,104px);line-height:.92;letter-spacing:-.005em;
+    margin:16px 0 0;text-wrap:balance;text-transform:uppercase;
+  }
+  h1 em{font-style:normal;color:var(--blueprint)}
+  .tb-sub{
+    font-size:17px;color:var(--ink-2);max-width:62ch;margin:18px 0 26px;
+  }
+  .tb-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));
+    border-top:1px solid var(--line);
+  }
+  .tb-cell{padding:12px 16px 14px;border-right:1px solid var(--line)}
+  .tb-cell:last-child{border-right:none}
+  .tb-k{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+  .tb-v{font-family:var(--display);font-size:19px;font-weight:500;margin-top:3px;letter-spacing:.01em}
+
+  /* ---------- sections ---------- */
+  section{margin:0 0 72px;scroll-margin-top:20px}
+  .sec-head{display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--line-2);padding-bottom:10px;margin-bottom:26px}
+  .sec-no{
+    font-family:var(--mono);font-size:12px;font-weight:500;color:var(--marker);
+    letter-spacing:.1em;flex:none;padding-top:4px;
+  }
+  h2{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.02em;
+     font-size:clamp(24px,3.4vw,33px);line-height:1.1;margin:0;flex:1}
+  .sec-note{font-family:var(--mono);font-size:11px;color:var(--ink-3);text-align:right;flex:none;letter-spacing:.04em}
+  .lede{font-size:16px;color:var(--ink-2);max-width:70ch;margin:0 0 26px}
+
+  /* ---------- stat band ---------- */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+  .stat{background:var(--surface);padding:20px 18px 18px}
+  .stat-n{font-family:var(--display);font-weight:600;font-size:44px;line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+  .stat-n small{font-size:17px;font-weight:400;color:var(--ink-3);margin-left:4px}
+  .stat-l{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:9px}
+  .stat-d{font-size:13px;color:var(--ink-2);margin-top:7px;line-height:1.45}
+  .stat--hero .stat-n{color:var(--marker)}
+  .stat--blue .stat-n{color:var(--blueprint)}
+
+  /* ---------- diagram ---------- */
+  .diagram-wrap{border:1px solid var(--line);background:var(--surface);padding:8px;overflow-x:auto}
+  .diagram-wrap svg{display:block;min-width:760px;width:100%;height:auto;font-family:var(--body)}
+  .nd-code{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em}
+  .nd-name{font-family:var(--display);font-size:15px;font-weight:500;letter-spacing:.03em}
+  .nd-sub{font-family:var(--body);font-size:11px}
+  .gate-t{font-family:var(--display);font-size:14px;font-weight:600;letter-spacing:.12em}
+  .gate-s{font-family:var(--body);font-size:11.5px}
+  .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.06em}
+
+  /* ---------- cards ---------- */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:14px}
+  .card{background:var(--surface);border:1px solid var(--line);padding:18px 18px 20px;display:flex;flex-direction:column;gap:9px}
+  .card-tag{font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--ice)}
+  .card h3{font-family:var(--display);font-weight:500;font-size:19px;letter-spacing:.02em;margin:0;text-transform:uppercase}
+  .card p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.55}
+  .card ul{margin:2px 0 0;padding-left:17px;font-size:13px;color:var(--ink-2);line-height:1.65}
+  .card ul li::marker{color:var(--marker)}
+  .card-file{margin-top:auto;padding-top:12px;font-family:var(--mono);font-size:10.5px;color:var(--ink-3);border-top:1px dashed var(--line-2);word-break:break-all}
+  .card-n{font-family:var(--display);font-size:34px;font-weight:600;line-height:1;color:var(--blueprint);font-variant-numeric:tabular-nums}
+
+  /* ---------- tables ---------- */
+  .tw{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px}
+  th{
+    font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-3);text-align:left;padding:11px 14px;border-bottom:1px solid var(--line-2);white-space:nowrap;font-weight:500;
+  }
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
+  tbody tr:last-child td{border-bottom:none}
+  td:first-child{color:var(--ink);font-weight:500}
+  td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .pill{
+    display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;
+    padding:2px 7px;border:1px solid currentColor;border-radius:2px;text-transform:uppercase;white-space:nowrap;
+  }
+  .p-p1{color:var(--marker)} .p-p2{color:var(--ok)} .p-p3{color:var(--blueprint)}
+  .p-p4{color:var(--ice)} .p-p5{color:var(--warn)} .p-a2{color:var(--ink-3)}
+
+  /* ---------- ladder ---------- */
+  .ladder{display:flex;flex-direction:column-reverse;gap:5px}
+  .rung{
+    display:grid;grid-template-columns:44px 1fr auto;gap:16px;align-items:center;
+    background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--line-2);
+    padding:13px 16px;
+  }
+  .rung-n{font-family:var(--display);font-size:24px;font-weight:600;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .rung-t{font-family:var(--display);font-size:17px;font-weight:500;letter-spacing:.02em;text-transform:uppercase}
+  .rung-d{font-size:13px;color:var(--ink-2);margin-top:2px}
+  .rung-v{font-family:var(--mono);font-size:12.5px;color:var(--ink);white-space:nowrap;text-align:right}
+  .rung--goal{border-left-color:var(--marker);background:var(--marker-soft)}
+  .rung--goal .rung-n,.rung--goal .rung-t{color:var(--marker)}
+  .rung--live{border-left-color:var(--ok)}
+  .rung--live .rung-n{color:var(--ok)}
+
+  /* ---------- callout ---------- */
+  .callout{border:1px solid var(--marker);background:var(--marker-soft);padding:20px 22px}
+  .callout h3{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:17px;margin:0 0 9px;color:var(--marker)}
+  .callout p{margin:0 0 10px;font-size:14px;color:var(--ink);max-width:75ch}
+  .callout p:last-child{margin-bottom:0}
+
+  /* ---------- platform cols ---------- */
+  .plats{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .plat{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--blueprint);padding:18px}
+  .plat--2{border-top-color:var(--ice)}
+  .plat-rank{font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3)}
+  .plat h3{font-family:var(--display);font-size:23px;font-weight:500;margin:5px 0 3px;letter-spacing:.02em;text-transform:uppercase}
+  .plat-role{font-size:13px;color:var(--marker);font-weight:600;margin-bottom:11px}
+  .plat ul{margin:0;padding-left:17px;font-size:13px;color:var(--ink-2);line-height:1.6}
+  .plat ul li{margin-bottom:5px}
+  .plat ul li::marker{color:var(--line-2)}
+
+  /* ---------- foot ---------- */
+  .foot{border-top:2px solid var(--ink);padding-top:20px;margin-top:70px;
+        display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+        font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.04em}
+
+  .quote{font-family:var(--display);font-weight:400;font-size:clamp(20px,3vw,29px);line-height:1.28;
+         letter-spacing:.01em;color:var(--ink);max-width:22ch;margin:0}
+  .quote-row{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;
+             border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);padding:34px 0;margin:0 0 40px}
+  .quote-note{font-size:14px;color:var(--ink-2);max-width:52ch}
+  @media (max-width:720px){ .quote-row{grid-template-columns:1fr;gap:18px} }
+
+  code{font-family:var(--mono);font-size:.88em;background:var(--surface-2);padding:1px 5px;border:1px solid var(--line);border-radius:2px;color:var(--ink);white-space:nowrap}
+  .callout code{background:var(--surface)}
+  a{color:var(--blueprint);text-decoration-thickness:1px;text-underline-offset:2px}
+  a:focus-visible,summary:focus-visible{outline:2px solid var(--marker);outline-offset:2px}
+</style>
+
+<div class="sheet">
+
+  <header class="titleblock">
+    <div class="tb-eyebrow">
+      <span>Mock up · агентска система</span>
+      <span>Органичен маркетинг</span>
+      <span>Ревизия 1.0</span>
+    </div>
+    <h1>Система<br><em>Отвес</em></h1>
+    <p class="tb-sub">
+      Отвесът е инструментът, който казва кое е вярно, преди да си излял бетона.
+      Това е конвейер от 14 агента, който произвежда съдържание за личен бранд
+      в строителството и инвестициите в имоти — и го превръща в разговори с хора, които имат капитал.
+    </p>
+    <div class="tb-grid">
+      <div class="tb-cell"><div class="tb-k">Талант</div><div class="tb-v">Строител · Шампион</div></div>
+      <div class="tb-cell"><div class="tb-k">Партньор</div><div class="tb-v">Atlanta</div></div>
+      <div class="tb-cell"><div class="tb-k">Роля</div><div class="tb-v">Investment Strategies</div></div>
+      <div class="tb-cell"><div class="tb-k">Пазар</div><div class="tb-v">България + диаспора</div></div>
+      <div class="tb-cell"><div class="tb-k">Собственик</div><div class="tb-v">Creative Director</div></div>
+    </div>
+  </header>
+
+  <!-- 00 -->
+  <section id="output">
+    <div class="sec-head">
+      <div class="sec-no">00</div>
+      <h2>Какво излиза от машината, всеки месец</h2>
+      <div class="sec-note">2 снимачни дни</div>
+    </div>
+    <div class="stats">
+      <div class="stat stat--blue">
+        <div class="stat-n">4</div>
+        <div class="stat-l">Long-form YouTube</div>
+        <div class="stat-d">Пакетирани изцяло: 5 заглавия, 3 thumbnail-а, 8 хука, скрипт.</div>
+      </div>
+      <div class="stat stat--hero">
+        <div class="stat-n">60</div>
+        <div class="stat-l">Shorts</div>
+        <div class="stat-d">24 нарязани · 20 batch ден · 12 терен · 4 архив.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">8</div>
+        <div class="stat-l">IG карусели</div>
+        <div class="stat-d">Плюс stories всеки ден — там се строи близостта.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">180<small>+</small></div>
+        <div class="stat-l">Публикации общо</div>
+        <div class="stat-d">YT · IG · FB · LinkedIn, с различен хук за всяка платформа.</div>
+      </div>
+      <div class="stat stat--hero">
+        <div class="stat-n">15<small>→100</small></div>
+        <div class="stat-l">Квалифицирани разговори</div>
+        <div class="stat-d">Единствената метрика, която брои. Месец 3 → месец 12.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="quote-row">
+    <p class="quote">Не гоним гледания.<br>Гоним хора с капаро в джоба.</p>
+    <p class="quote-note">
+      Видео с 4 000 гледания и 6 квалифицирани разговора бие видео с 400 000 гледания и нула.
+      Целият конвейер е настроен около това — затова има гейт за пакетирането
+      и гейт за съответствието, а не гейт за виралност.
+      Caleb Ralston го формулира най-точно: оптимизираш за <strong>доверие</strong>, не за вирусност.
+    </p>
+  </div>
+
+  <!-- 01 -->
+  <section id="pipeline">
+    <div class="sec-head">
+      <div class="sec-no">01</div>
+      <h2>Конвейерът · 14 агента, 2 гейта</h2>
+      <div class="sec-note">Five Ms цикъл</div>
+    </div>
+    <p class="lede">
+      Оркестраторът върти цикъла Model → Map → Make → Multiply → Measure.
+      Между <strong>03</strong> и <strong>05</strong> стои гейтът за пакетиране: там умират
+      7 от всеки 11 теми — преди да са изяли 12 часа продукция.
+      Преди публикуване стои гейтът за съответствие и той няма право на обжалване.
+    </p>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 1000 880" role="img" aria-label="Диаграма на конвейера от 14 агента с два контролни гейта">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9 z" fill="var(--line-2)"/>
+          </marker>
+          <marker id="ar-m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9 z" fill="var(--marker)"/>
+          </marker>
+        </defs>
+
+        <g fill="none" stroke="var(--line-2)" stroke-width="1.4" marker-end="url(#ar)">
+          <path d="M500,76 V94 H160 V108"/>
+          <path d="M500,76 V108"/>
+          <path d="M500,76 V94 H840 V108"/>
+          <path d="M160,166 V190 H500 V208"/>
+          <path d="M500,166 V208"/>
+          <path d="M840,166 V190 H500 V208"/>
+          <path d="M500,266 V282 H350 V298"/>
+          <path d="M450,325 H548"/>
+          <path d="M350,356 V378"/>
+          <path d="M500,414 V428 H160 V440"/>
+          <path d="M260,467 H398"/>
+          <path d="M600,467 H738"/>
+          <path d="M840,498 V514 H350 V530"/>
+          <path d="M450,557 H548"/>
+          <path d="M350,588 V610"/>
+          <path d="M500,646 V672"/>
+          <path d="M500,730 V762"/>
+        </g>
+
+        <!-- feedback -->
+        <path d="M350,789 H30 V137 H58" fill="none" stroke="var(--marker)" stroke-width="1.2"
+              stroke-dasharray="5 4" marker-end="url(#ar-m)" opacity=".85"/>
+        <text class="lbl" x="38" y="470" fill="var(--marker)" transform="rotate(-90 38 470)" text-anchor="middle">
+          въпроси на зрителите → нови сигнали
+        </text>
+
+        <!-- row A -->
+        <g>
+          <rect x="380" y="20" width="240" height="56" fill="var(--blueprint)"/>
+          <text class="nd-code" x="394" y="41" fill="var(--surface)" opacity=".75">00</text>
+          <text class="nd-name" x="500" y="42" fill="var(--surface)" text-anchor="middle">ОРКЕСТРАТОР</text>
+          <text class="nd-sub" x="500" y="61" fill="var(--surface)" text-anchor="middle" opacity=".8">Model · Map · Make · Multiply · Measure</text>
+        </g>
+
+        <!-- row B -->
+        <g>
+          <rect x="60" y="108" width="200" height="58" fill="var(--surface-2)" stroke="var(--line-2)"/>
+          <text class="nd-code" x="72" y="128" fill="var(--marker)">01</text>
+          <text class="nd-name" x="72" y="146" fill="var(--ink)">РАДАР</text>
+          <text class="nd-sub" x="72" y="161" fill="var(--ink-3)">search · коментари · пазар</text>
+
+          <rect x="400" y="108" width="200" height="58" fill="var(--surface-2)" stroke="var(--line-2)"/>
+          <text class="nd-code" x="412" y="128" fill="var(--marker)">11</text>
+          <text class="nd-name" x="412" y="146" fill="var(--ink)">АНАЛИЗ</text>
+          <text class="nd-sub" x="412" y="161" fill="var(--ink-3)">CTR · задържане · диагноза</text>
+
+          <rect x="740" y="108" width="200" height="58" fill="var(--surface-2)" stroke="var(--line-2)"/>
+          <text class="nd-code" x="752" y="128" fill="var(--marker)">12</text>
+          <text class="nd-name" x="752" y="146" fill="var(--ink)">МОНЕТИЗАЦИЯ</text>
+          <text class="nd-sub" x="752" y="161" fill="var(--ink-3)">един CTA на видео</text>
+        </g>
+
+        <!-- row C -->
+        <g>
+          <rect x="400" y="208" width="200" height="58" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text class="nd-code" x="412" y="228" fill="var(--marker)">02</text>
+          <text class="nd-name" x="412" y="246" fill="var(--ink)">ИДЕИ</text>
+          <text class="nd-sub" x="412" y="261" fill="var(--ink-3)">темата бие всичко останало</text>
+        </g>
+
+        <!-- row D -->
+        <g>
+          <rect x="250" y="298" width="200" height="58" fill="var(--surface)" stroke="var(--line-2)"/>
+          <text class="nd-code" x="262" y="318" fill="var(--marker)">03</text>
+          <text class="nd-name" x="262" y="336" fill="var(--ink)">ЗАГЛАВИЯ</text>
+          <text class="nd-sub" x="262" y="351" fill="var(--ink-3)">20 формули · 5 варианта</text>
+
+          <rect x="550" y="298" width="200" height="58" fill="var(--surface)" stroke="var(--line-2)"/>
+          <text class="nd-code" x="562" y="318" fill="var(--marker)">04</text>
+          <text class="nd-name" x="562" y="336" fill="var(--ink)">THUMBNAILS</text>
+          <text class="nd-sub" x="562" y="351" fill="var(--ink-3)">12 архетипа · 3 концепции</text>
+        </g>
+
+        <!-- gate 1 -->
+        <g>
+          <rect x="150" y="378" width="700" height="36" fill="var(--marker)"/>
+          <text class="gate-t" x="170" y="401" fill="#F8F4F1">ГЕЙТ 1 · ПАКЕТИРАНЕ</text>
+          <text class="gate-s" x="830" y="401" fill="#F8F4F1" text-anchor="end" opacity=".92">тук умират 7 от 11 теми — и това е успех</text>
+        </g>
+
+        <!-- row E -->
+        <g>
+          <rect x="60" y="440" width="200" height="58" fill="var(--surface)" stroke="var(--line-2)"/>
+          <text class="nd-code" x="72" y="460" fill="var(--marker)">05</text>
+          <text class="nd-name" x="72" y="478" fill="var(--ink)">СТРУКТУРА</text>
+          <text class="nd-sub" x="72" y="493" fill="var(--ink-3)">retention карта · loops</text>
+
+          <rect x="400" y="440" width="200" height="58" fill="var(--surface)" stroke="var(--line-2)"/>
+          <text class="nd-code" x="412" y="460" fill="var(--marker)">06</text>
+          <text class="nd-name" x="412" y="478" fill="var(--ink)">ХУК</text>
+          <text class="nd-sub" x="412" y="493" fill="var(--ink-3)">Triple C · 8 варианта</text>
+
+          <rect x="740" y="440" width="200" height="58" fill="var(--surface)" stroke="var(--line-2)"/>
+          <text class="nd-code" x="752" y="460" fill="var(--marker)">07</text>
+          <text class="nd-name" x="752" y="478" fill="var(--ink)">СКРИПТ</text>
+          <text class="nd-sub" x="752" y="493" fill="var(--ink-3)">H.E.I.T. · anti-AI филтър</text>
+        </g>
+
+        <!-- row F -->
+        <g>
+          <rect x="250" y="530" width="200" height="58" fill="var(--surface)" stroke="var(--line-2)"/>
+          <text class="nd-code" x="262" y="550" fill="var(--marker)">08</text>
+          <text class="nd-name" x="262" y="568" fill="var(--ink)">SHORTS</text>
+          <text class="nd-sub" x="262" y="583" fill="var(--ink-3)">8 формата · 60/месец</text>
+
+          <rect x="550" y="530" width="200" height="58" fill="var(--surface)" stroke="var(--line-2)"/>
+          <text class="nd-code" x="562" y="550" fill="var(--marker)">09</text>
+          <text class="nd-name" x="562" y="568" fill="var(--ink)">ПРЕНОС</text>
+          <text class="nd-sub" x="562" y="583" fill="var(--ink-3)">IG · FB · LinkedIn</text>
+        </g>
+
+        <!-- gate 2 -->
+        <g>
+          <rect x="150" y="610" width="700" height="36" fill="var(--ink)"/>
+          <text class="gate-t" x="170" y="633" fill="var(--ground)">ГЕЙТ 2 · АГЕНТ 10 · СЪОТВЕТСТВИЕ</text>
+          <text class="gate-s" x="830" y="633" fill="var(--ground)" text-anchor="end" opacity=".85">фонд · доходност · трети лица — без подпис не излиза</text>
+        </g>
+
+        <!-- row G -->
+        <g>
+          <rect x="400" y="672" width="200" height="58" fill="var(--surface)" stroke="var(--line-2)"/>
+          <text class="nd-code" x="412" y="692" fill="var(--marker)">13</text>
+          <text class="nd-name" x="412" y="710" fill="var(--ink)">ОБЩНОСТ</text>
+          <text class="nd-sub" x="412" y="725" fill="var(--ink-3)">коментари · DM триаж</text>
+        </g>
+
+        <!-- outcome -->
+        <g>
+          <rect x="350" y="762" width="300" height="54" fill="none" stroke="var(--marker)" stroke-width="2"/>
+          <text class="nd-name" x="500" y="784" fill="var(--marker)" text-anchor="middle">КВАЛИФИЦИРАНИ РАЗГОВОРИ</text>
+          <text class="nd-sub" x="500" y="803" fill="var(--ink-3)" text-anchor="middle">капитал ≥ 50 000 лв. · хоризонт ≤ 12 месеца</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section id="frameworks">
+    <div class="sec-head">
+      <div class="sec-no">02</div>
+      <h2>Рамките · как се пакетира и как се подава</h2>
+      <div class="sec-note">Gaudet · Ralston, адаптирани</div>
+    </div>
+    <p class="lede">
+      Packaging не е thumbnail. Packaging е цялата верига на обещанието:
+      <strong>идея → заглавие → thumbnail → хук → payoff</strong>.
+      Ако едно звено лъже, всички звена губят — и това се вижда в данните като високо CTR с ниско задържане.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-tag">Заглавия</div>
+        <div class="card-n">20 + 60</div>
+        <h3>Формули и готови заглавия</h3>
+        <p>Цената на грешката · Изповедта · Обратното мнение · Тестът с обем · Симулация с капитал · Географски арбитраж — и още 14.</p>
+        <ul>
+          <li>Макс. 55 знака (кирилицата е по-широка)</li>
+          <li>Числото отпред, едно обещание, без „и“</li>
+          <li>60 готови заглавия по пилари</li>
+        </ul>
+        <div class="card-file">02-frameworks/title-formulas.md</div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Thumbnails</div>
+        <div class="card-n">12 + 30</div>
+        <h3>Архетипи и концепции</h3>
+        <p>Законът за кирилицата: макс. <strong>3 думи</strong> или 1 число + 1 дума. Английските правила тук не работят.</p>
+        <ul>
+          <li><code>КАПАН</code> · <code>38 000 лв.</code> · <code>НЕ КУПУВАЙ</code></li>
+          <li>Тест на 10% zoom, преди да излезе</li>
+          <li>Един акцентен цвят. Никога два</li>
+        </ul>
+        <div class="card-file">02-frameworks/thumbnail-system.md</div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Хукове</div>
+        <div class="card-n">20</div>
+        <h3>Първите 30 секунди</h3>
+        <p>Написани дословно, не като указания. Ядро: Triple C — контекст, обратна теза, отворен loop.</p>
+        <ul>
+          <li>Три нива на риск: SAFE / SHARP / POLARIZING</li>
+          <li>Забранено: поздрав, интро, „в днешното видео“</li>
+          <li>Тестът: пусни 30 сек на трима — какво следва?</li>
+        </ul>
+        <div class="card-file">02-frameworks/hook-templates-long.md</div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Подаване на информацията</div>
+        <div class="card-n">10</div>
+        <h3>Шаблони за представяне</h3>
+        <p>Форензиката · Разборът на сделка · Географският контраст · Протоколът · Митът · Симулацията · Изповедта · Шампионският пренос · Отговорът · Картата.</p>
+        <ul>
+          <li>H.E.I.T. · Five Ms · Triple C · 70/20/10</li>
+          <li>80/20 експертиза / личност</li>
+          <li>Всеки Explain има Illustration — иначе се реже</li>
+        </ul>
+        <div class="card-file">02-frameworks/presentation-frameworks.md</div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Short form</div>
+        <div class="card-n">8</div>
+        <h3>Формати за къси</h3>
+        <p>Дефектът · Числото · Митът · Протоколът · Историята · Сравнението · Отговорът · Шампионът.</p>
+        <ul>
+          <li>Едно твърдение, едно доказателство, един loop</li>
+          <li>Хук в първите 1.5 сек, не 3</li>
+          <li>Краят отваря нещо — не моли за нищо</li>
+        </ul>
+        <div class="card-file">02-frameworks/shorts-frameworks.md</div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Диагностика</div>
+        <div class="card-n">4</div>
+        <h3>Четирите провала</h3>
+        <p>Данните казват точно кой агент е сгрешил:</p>
+        <ul>
+          <li>Ниско CTR + ниско AVD → слаба идея (02)</li>
+          <li>Ниско CTR + добро AVD → слаб пакет (03/04)</li>
+          <li>Високо CTR + ниско AVD → неплатено обещание</li>
+          <li>Спад в първите 30 сек → слаб хук (06)</li>
+        </ul>
+        <div class="card-file">02-frameworks/packaging-system.md</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section id="bank">
+    <div class="sec-head">
+      <div class="sec-no">03</div>
+      <h2>Банката · 24 епизода и 60 shorts</h2>
+      <div class="sec-note">6 месеца напред</div>
+    </div>
+    <p class="lede">
+      Извадка от първите два месеца. Всеки ред носи шаблон за подаване (PT),
+      хук (H) и thumbnail архетип (T) — тоест влиза в продукция без допълнително решение.
+    </p>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Заглавие</th><th>Пилар</th><th>Рамка</th><th>Thumbnail</th><th class="num">Shorts</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Тази пукнатина струва 38 000 лв.</td>
+            <td><span class="pill p-p1">Скритата цена</span></td>
+            <td class="num">PT1 · H1</td>
+            <td>T1 — макро дефект · <code>38 000 лв.</code></td>
+            <td class="num">6</td>
+          </tr>
+          <tr>
+            <td>Ако имах 100 000 лв. днес — точният ми план</td>
+            <td><span class="pill p-p3">Стратегии</span></td>
+            <td class="num">PT6 · H12</td>
+            <td>T2 — лице + число · <code>100 000</code></td>
+            <td class="num">7</td>
+          </tr>
+          <tr>
+            <td>Строих в 10 държави. България греши в 3 неща.</td>
+            <td><span class="pill p-p4">Световен стандарт</span></td>
+            <td class="num">PT3 · H10</td>
+            <td>T10 — флагове · <code>10 ДЪРЖАВИ</code></td>
+            <td class="num">8</td>
+          </tr>
+          <tr>
+            <td>Това, което бобслеят ме научи за риска</td>
+            <td><span class="pill p-p5">Шампионът</span></td>
+            <td class="num">PT8 · H11</td>
+            <td>T5 — две каски · <code>130 км/ч</code></td>
+            <td class="num">5</td>
+          </tr>
+          <tr>
+            <td>Стратегическите парцели в България свършват</td>
+            <td><span class="pill p-p2">Терен</span></td>
+            <td class="num">PT10 · H18</td>
+            <td>T6 — сателит · <code>СВЪРШВАТ</code></td>
+            <td class="num">7</td>
+          </tr>
+          <tr>
+            <td>7 проверки, преди да платиш капаро</td>
+            <td><span class="pill p-p1">Скритата цена</span></td>
+            <td class="num">PT4 · H19</td>
+            <td>T11 — тефтер · <code>7 ТОЧКИ</code></td>
+            <td class="num">8</td>
+          </tr>
+          <tr>
+            <td>Реална сделка: 180 000 → 245 000. Ред по ред.</td>
+            <td><span class="pill p-p3">Стратегии</span></td>
+            <td class="num">PT2 · H13</td>
+            <td>T7 — пари + фасада · <code>180 ▸ 245</code></td>
+            <td class="num">7</td>
+          </tr>
+          <tr>
+            <td>Живееш в чужбина? Така се купува имот в България.</td>
+            <td><span class="pill p-a2">Диаспора</span></td>
+            <td class="num">PT4 · H15</td>
+            <td>T10 — телефон + обект · <code>ОТ ДАЛЕЧ</code></td>
+            <td class="num">8</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cards" style="margin-top:14px">
+      <div class="card">
+        <div class="card-tag">Математиката на 60-те</div>
+        <h3>Откъде идват shorts-овете</h3>
+        <ul>
+          <li><strong>24</strong> нарязани от long-form — нула допълнително снимане</li>
+          <li><strong>20</strong> от един batch ден — 20 отговора по минута</li>
+          <li><strong>12</strong> от обекти, снимани с телефон: 1 обект = 1 клип</li>
+          <li><strong>4</strong> от архив и бобслей кадри + нов voiceover</li>
+        </ul>
+        <p>Матрицата 8 формата × 5 пилара дава 32 работещи клетки — по 2 идеи всяка е 64 идеи всеки месец, механично.</p>
+        <div class="card-file">03-content-bank/shorts-generator.md</div>
+      </div>
+      <div class="card">
+        <div class="card-tag">Петте пилара</div>
+        <h3>Разпределение</h3>
+        <ul>
+          <li><span class="pill p-p1">P1</span> Скритата цена — 30% · форензика</li>
+          <li><span class="pill p-p2">P2</span> Терен и парцел — 20% · ПУП, достъп, регулация</li>
+          <li><span class="pill p-p3">P3</span> Investment strategies — 25% · разбор на сделки</li>
+          <li><span class="pill p-p4">P4</span> Световен стандарт — 15% · 10 държави</li>
+          <li><span class="pill p-p5">P5</span> Шампионският протокол — 10% · човекът</li>
+        </ul>
+        <p>80% експертиза, 20% личност. P5 не стои само в отделни епизоди — разпръснат е вътре в експертните.</p>
+        <div class="card-file">00-brand/brand-core.md</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section id="growth">
+    <div class="sec-head">
+      <div class="sec-no">04</div>
+      <h2>Растеж · YouTube първо, после IG и FB</h2>
+      <div class="sec-note">90-дневен план</div>
+    </div>
+    <p class="lede">
+      Българският пазар е малък — и точно затова е печеливш.
+      Един американски канал за имоти се бори с 10 000 други. Тук се бориш с двайсет,
+      и повечето от тях четат обяви пред камера.
+      Следствието: не гони обем, гони намерение.
+    </p>
+
+    <div class="plats">
+      <div class="plat">
+        <div class="plat-rank">Приоритет 1</div>
+        <h3>YouTube</h3>
+        <div class="plat-role">Придобиване и авторитет</div>
+        <ul>
+          <li><strong>Месеци 1–3 — search, не browse.</strong> YouTube няма да те препоръчва, докато не знае кой си.</li>
+          <li>Правило за избор на тема: ако най-доброто видео по нея е с под 20 000 гледания, от 2021, с лошо аудио — това е твоята тема.</li>
+          <li>Дупки в момента: <code>акт 14 15 16</code>, <code>ПУП</code>, <code>капаро</code>, <code>оглед на апартамент</code>, <code>имот от чужбина</code>.</li>
+          <li><strong>Месеци 4–8</strong> — серии и плейлисти по намерение, не по тема.</li>
+          <li>Shorts носят абонати само ако са по същата тема като long-form и оставят loop, който се затваря само там.</li>
+        </ul>
+      </div>
+      <div class="plat plat--2">
+        <div class="plat-rank">Приоритет 2</div>
+        <h3>Instagram</h3>
+        <div class="plat-role">Близост и разговор</div>
+        <ul>
+          <li>IG не е канал за придобиване. IG е канал за доверие.</li>
+          <li>Reels 5–7 седмично — <strong>пренаписан хук</strong>, не същият като в YouTube.</li>
+          <li>Карусели 2 седмично — тук се трупат save-ове и авторитет.</li>
+          <li><strong>Stories всеки ден.</strong> Анкетите са безплатен research за агент 01.</li>
+          <li>DM-ите са продуктът. Агент 13 ги триажира в четири кофи.</li>
+        </ul>
+      </div>
+      <div class="plat plat--2">
+        <div class="plat-rank">Приоритет 2</div>
+        <h3>Facebook</h3>
+        <div class="plat-role">Тук са парите</div>
+        <ul>
+          <li>Не подценявай FB заради имиджа му. Аудиторията с капитал в България — 35 до 60 — е там.</li>
+          <li>Качвай <strong>целия</strong> long-form нативно. FB награждава native и има търпелива аудитория.</li>
+          <li>FB Reels е най-евтиният органичен reach в BG в момента.</li>
+          <li><strong>Групите са златото</strong> — включително „Българи в Германия/Лондон“. Най-евтиният достъп до диаспората.</li>
+          <li>Правило: давай стойност десет пъти, преди да споменеш себе си веднъж.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tw" style="margin-top:14px">
+      <table>
+        <thead>
+          <tr><th>Период</th><th>YouTube</th><th>IG / FB</th><th>Имейл</th><th>Цел</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Седмици 1–4</td><td>4 long (search теми) · 60 shorts</td><td>Reels 5/сед · stories всеки ден · FB native</td><td>Чеклист онлайн</td><td class="num">500 абонати · AVD &gt; 45%</td></tr>
+          <tr><td>Седмици 5–8</td><td>4 long · първа серия</td><td>+ карусели 2/сед · 3 FB групи</td><td>Първи 200 контакта</td><td class="num">2 000 абонати · 5 разговора</td></tr>
+          <tr><td>Седмици 9–12</td><td>4 long · серия + първи гост</td><td>+ първи Live · собствена FB група</td><td>Писмо всяка седмица</td><td class="num">5 000 абонати · 15 разговора</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section id="money">
+    <div class="sec-head">
+      <div class="sec-no">05</div>
+      <h2>Монетизация · седем нива до фонда</h2>
+      <div class="sec-note">Доверието е активът</div>
+    </div>
+    <p class="lede">
+      AdSense в България дава 1–3 долара на хиляда гледания. Приятно е.
+      Не е причина да правиш каквото и да било.
+      Правилото: ако едно решение е добро за AdSense и лошо за доверието — решението е грешно.
+    </p>
+
+    <div class="ladder">
+      <div class="rung">
+        <div class="rung-n">0</div>
+        <div><div class="rung-t">Чеклистите</div><div class="rung-d">„7 проверки преди капаро“ · срещу имейл. Без лист всичко нагоре зависи от алгоритъм, който не контролираш.</div></div>
+        <div class="rung-v">месец 1</div>
+      </div>
+      <div class="rung">
+        <div class="rung-n">1</div>
+        <div><div class="rung-t">Директни спонсори</div><div class="rung-d">Банки, застрахователи, материали, геодезия, соларни системи. Никога спонсор, който не би препоръчал на приятел.</div></div>
+        <div class="rung-v">2 – 6 хил. лв./мес</div>
+      </div>
+      <div class="rung rung--live">
+        <div class="rung-n">2</div>
+        <div><div class="rung-t">Atlanta комисиона</div><div class="rung-d">Вече работи. Задачата на системата е attribution — кое видео е донесло кой купувач.</div></div>
+        <div class="rung-v">работи сега</div>
+      </div>
+      <div class="rung">
+        <div class="rung-n">3</div>
+        <div><div class="rung-t">Строителен одит преди покупка</div><div class="rung-d">Първите реални пари. Човек, който гледа имот за 250 000 лв., плаща 600 без да мигне, за да спи спокойно.</div></div>
+        <div class="rung-v">400 – 900 лв.</div>
+      </div>
+      <div class="rung">
+        <div class="rung-n">4</div>
+        <div><div class="rung-t">Протоколът · дигитален продукт</div><div class="rung-d">12 модула. Съдържанието вече е направено — епизодите са модулите, подредени.</div></div>
+        <div class="rung-v">390 – 590 лв.</div>
+      </div>
+      <div class="rung">
+        <div class="rung-n">5</div>
+        <div><div class="rung-t">Кръгът · общност</div><div class="rung-d">Най-предвидимият приход. И предварителната квалификация за фонда — който плаща месечно, за да те слуша, после инвестира.</div></div>
+        <div class="rung-v">99 – 199 лв./мес</div>
+      </div>
+      <div class="rung">
+        <div class="rung-n">6</div>
+        <div><div class="rung-t">B2B, лекции, спортна платформа</div><div class="rung-d">Консултации за предприемачи, конференции, корпоративни събития. Канал, който конкурентите му нямат.</div></div>
+        <div class="rung-v">месец 9+</div>
+      </div>
+      <div class="rung rung--goal">
+        <div class="rung-n">7</div>
+        <div><div class="rung-t">Фондът</div><div class="rung-d">Съдържанието носи две неща: deal flow (хората ти носят имоти преди пазара) и capital flow (хора, които 18 месеца са те гледали да мислиш на глас).</div></div>
+        <div class="rung-v">целта</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section id="compliance">
+    <div class="sec-head">
+      <div class="sec-no">06</div>
+      <h2>Гейт 2 · защо агент 10 не е украса</h2>
+      <div class="sec-note">Hard stop</div>
+    </div>
+    <div class="callout">
+      <h3>⛔ Фонд + доходност + публичен канал = регулирана територия</h3>
+      <p>
+        В момента, в който партньорът ти говори публично за <strong>фонд</strong> и за <strong>доходност</strong>,
+        влизате в поле, което в България и ЕС е регулирано — колективните инвестиционни схеми
+        (<code>ЗДКИСДПКИ</code> / <code>AIFMD</code>, надзор от <code>КФН</code>).
+        Един агент, който хваща това преди публикуване, струва по-малко от един разговор с регулатора.
+      </p>
+      <p>
+        <strong>Правилото на системата:</strong> фондът се споменава като посока и философия,
+        никога като оферта. Съдържанието води до <em>разговор</em>, не до <em>сделка</em>.
+        Офертата се прави 1:1, след квалификация, с юрист в стаята.
+      </p>
+      <p>
+        Другите две червени линии: никакво обещание за доходност
+        („тази сделка е реализирала 12% през 2024, миналото не е гаранция“ ✓ ·
+        „ще ти върне 12%“ ✗) и никакво назоваване на фирма или лице в негативен контекст —
+        говорим за практиката, не за фирмата.
+      </p>
+      <p>
+        Това е единственото място в системата, което не е мокъп: преди старт го дай
+        на лицензиран юрист. Всичко останало можеш да поправиш след месец.
+      </p>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section id="files">
+    <div class="sec-head">
+      <div class="sec-no">07</div>
+      <h2>Къде е кое</h2>
+      <div class="sec-note">31 файла</div>
+    </div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Файл</th><th>Отговаря на</th></tr></thead>
+        <tbody>
+          <tr><td>06-operations/mock-run-transcript.md</td><td>Пълно симулирано изпълнение — една тема от сигнал до публикация. <strong>Започни оттук.</strong></td></tr>
+          <tr><td>00-brand/brand-core.md</td><td>Позициониране, три аватара, пет пилара, глас, забранени думи, северна звезда</td></tr>
+          <tr><td>01-agents/ (14 файла)</td><td>Всеки агент: вход, изход, правила, формат на отговора</td></tr>
+          <tr><td>02-frameworks/title-formulas.md</td><td>20 формули за заглавия + 60 готови на български</td></tr>
+          <tr><td>02-frameworks/thumbnail-system.md</td><td>12 архетипа + 30 концепции + законът за кирилицата</td></tr>
+          <tr><td>02-frameworks/hook-templates-long.md</td><td>20 хука, написани дословно, в три нива на риск</td></tr>
+          <tr><td>02-frameworks/presentation-frameworks.md</td><td>Изследването на Gaudet и Ralston + 10 шаблона за подаване</td></tr>
+          <tr><td>03-content-bank/longform-concepts.md</td><td>24 епизода за 6 месеца, с пакет и добив на shorts</td></tr>
+          <tr><td>03-content-bank/shorts-bank-month-01.md</td><td>60 shorts с дословни хукове и седмичен календар</td></tr>
+          <tr><td>04-growth/growth-engine.md</td><td>YouTube → IG → FB, три фази, 90-дневен план, кога се пускат реклами</td></tr>
+          <tr><td>05-monetization/monetization-stack.md</td><td>Седем нива, цени, капацитет, прогноза</td></tr>
+          <tr><td>06-operations/weekly-cadence.md</td><td>Месечен и седмичен ритъм, RACI, definition of done, кризисен протокол</td></tr>
+          <tr><td>schemas/content-brief.schema.json</td><td>Договорът между агентите — липсва ли поле, следващият агент не стартира</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div>Система Отвес · ревизия 1.0 · mock up</div>
+    <div>Рамки: Sam Gaudet · Caleb Ralston — адаптирани за BG пазар</div>
+    <div>Гейт 2 подлежи на юридически преглед преди старт</div>
+  </footer>
+</div>

@@ -1,0 +1,86 @@
+{
+  "$comment": "Mock състояние на конвейера — това е държавата, която Агент 00 чете и пише при всяко изпълнение.",
+  "cycle": "2026-09",
+  "brand_version": "1.0",
+  "north_star": { "metric": "qualified_conversations", "target": 15, "actual": 11 },
+  "gates": {
+    "gate_1_packaging": { "owner": "03-packaging-agent", "passed": 4, "killed": 7 },
+    "gate_2_compliance": { "owner": "10-compliance-agent", "green": 58, "amber": 3, "red": 1 }
+  },
+  "longform": [
+    {
+      "id": "E01",
+      "title": "Тази пукнатина струва 38 000 лв.",
+      "pillar": "P1",
+      "template": "PT1",
+      "hook": "H1",
+      "thumbnail": { "archetype": "T1", "text": "38 000 лв.", "variants": 3, "chosen": "TC-1" },
+      "status": "published",
+      "published_at": "2026-09-03T19:00:00+03:00",
+      "metrics": { "impressions": 41200, "ctr": 0.061, "views": 2513, "avd_pct": 0.52, "qualified_conversations": 4 },
+      "shorts_yield": 6,
+      "cta": "checklist_7_proverki",
+      "compliance": "GREEN"
+    },
+    {
+      "id": "E02",
+      "title": "Ако имах 100 000 лв. днес — точният ми план",
+      "pillar": "P3",
+      "template": "PT6",
+      "hook": "H12",
+      "thumbnail": { "archetype": "T2", "text": "100 000", "variants": 3, "chosen": "TC-2" },
+      "status": "published",
+      "published_at": "2026-09-10T19:00:00+03:00",
+      "metrics": { "impressions": 78900, "ctr": 0.081, "views": 6390, "avd_pct": 0.34, "qualified_conversations": 3 },
+      "shorts_yield": 7,
+      "cta": "subscribe_next_video",
+      "compliance": "GREEN",
+      "flag": "OVERPROMISE — CTR 8.1% при AVD 34%. Агент 11: заглавието обещава повече, отколкото видеото плаща. Агент 03 да смекчи; Агент 05 да премести payoff-а от 9:00 на 4:30."
+    },
+    {
+      "id": "E03",
+      "title": "Строих в 10 държави. България греши в 3 неща.",
+      "pillar": "P4",
+      "template": "PT3",
+      "hook": "H10",
+      "thumbnail": { "archetype": "T10", "text": "10 ДЪРЖАВИ", "variants": 3, "chosen": "TC-1" },
+      "status": "in_edit",
+      "shorts_yield": 8,
+      "cta": "checklist_7_proverki",
+      "compliance": "GREEN"
+    },
+    {
+      "id": "E04",
+      "title": "Това, което бобслеят ме научи за риска",
+      "pillar": "P5",
+      "template": "PT8",
+      "hook": "H11",
+      "thumbnail": { "archetype": "T5", "text": "130 км/ч", "variants": 3, "chosen": null },
+      "status": "scripted",
+      "shorts_yield": 5,
+      "cta": "instagram",
+      "compliance": "PENDING"
+    }
+  ],
+  "shorts": { "planned": 60, "produced": 47, "published": 41, "buffer": 6, "blocked_by_compliance": 1 },
+  "blocked": [
+    {
+      "asset": "B-EXTRA-03",
+      "reason": "RED — клипът съдържа изречението 'тази стратегия дава сигурни 12% годишно'. Обещание за доходност.",
+      "action": "Пренаписване: показва се реализирана доходност от минала сделка + дисклеймър. Изпратено на Агент 07.",
+      "owner": "10-compliance-agent"
+    }
+  ],
+  "decisions_for_cd": [
+    {
+      "question": "E02 има високо CTR и слабо задържане. Смекчаваме ли заглавието (губим ~2% CTR) или пренаписваме структурата?",
+      "recommendation": "Пренапиши структурата, задръж заглавието. Обещанието е добро — доставката закъснява. Премести сметката от 9:00 на 4:30.",
+      "cost_of_delay": "Всяка седмица с AVD 34% учи алгоритъма, че каналът не задържа."
+    },
+    {
+      "question": "Гост за E24: нотариус или оценител?",
+      "recommendation": "Нотариус. По-висок search обем, по-ясна болка, по-лесно се нарязва на shorts.",
+      "cost_of_delay": "нисък"
+    }
+  ]
+}

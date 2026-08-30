@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/content-brief.schema.json",
+  "title": "Content Brief",
+  "description": "Договорът между агентите. Всеки актив в системата се описва с този обект. Ако едно поле липсва, следващият агент не стартира.",
+  "type": "object",
+  "required": ["id", "type", "pillar", "avatar", "packaging", "presentation_template", "cta", "compliance"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^(E|A|B|C|D)[0-9]{2,3}$" },
+    "type": { "enum": ["longform", "short", "carousel", "story", "post"] },
+    "pillar": { "enum": ["P1", "P2", "P3", "P4", "P5"] },
+    "avatar": { "type": "array", "items": { "enum": ["A1", "A2", "A3"] }, "minItems": 1 },
+    "signal_id": { "type": "string", "description": "Произход от Агент 01 — всяка идея трябва да има източник" },
+    "packaging": {
+      "type": "object",
+      "required": ["title", "thumbnail", "hook_template"],
+      "properties": {
+        "title": { "type": "string", "maxLength": 55 },
+        "title_formula": { "type": "string", "pattern": "^F([1-9]|1[0-9]|20)$" },
+        "title_variants": { "type": "array", "items": { "type": "string" }, "minItems": 5 },
+        "thumbnail": {
+          "type": "object",
+          "required": ["archetype", "text", "variants"],
+          "properties": {
+            "archetype": { "type": "string", "pattern": "^T([1-9]|1[0-2])$" },
+            "text": { "type": "string", "maxLength": 12, "description": "Макс. 3 думи на кирилица" },
+            "variants": { "type": "integer", "minimum": 3 },
+            "chosen": { "type": ["string", "null"] }
+          }
+        },
+        "hook_template": { "type": "string", "pattern": "^H([1-9]|1[0-9]|20)$" },
+        "hook_risk": { "enum": ["SAFE", "SHARP", "POLARIZING"] }
+      }
+    },
+    "presentation_template": { "type": "string", "pattern": "^PT([1-9]|10)$" },
+    "structure": {
+      "type": "object",
+      "properties": {
+        "duration_min": { "type": "number" },
+        "short_markers": { "type": "integer", "minimum": 6, "description": "Минимум 6 за long-form" },
+        "loops": { "type": "array", "items": { "type": "object", "properties": { "open_at": {"type":"string"}, "close_at": {"type":"string"} } } }
+      }
+    },
+    "cta": {
+      "type": "object",
+      "required": ["primary"],
+      "description": "Точно ЕДИН primary CTA. Правило 3:1 educational:commercial.",
+      "properties": {
+        "primary": { "enum": ["checklist_email", "subscribe_next", "consultation", "audit", "product", "community", "instagram", "none"] },
+        "commercial": { "type": "boolean" },
+        "attribution_tag": { "type": "string" }
+      }
+    },
+    "compliance": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["PENDING", "GREEN", "AMBER", "RED"] },
+        "notes": { "type": "string" },
+        "disclaimer_required": { "type": "boolean" }
+      }
+    },
+    "distribution": {
+      "type": "object",
+      "properties": {
+        "youtube": { "type": "boolean" },
+        "instagram": { "type": "boolean" },
+        "facebook": { "type": "boolean" },
+        "facebook_native_longform": { "type": "boolean" },
+        "linkedin": { "type": "boolean" },
+        "hook_rewrites": { "type": "integer", "minimum": 1, "description": "Различни хук монтажи по платформа" }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "impressions": { "type": "integer" },
+        "ctr": { "type": "number" },
+        "views": { "type": "integer" },
+        "avd_pct": { "type": "number" },
+        "retention_30s": { "type": "number" },
+        "emails": { "type": "integer" },
+        "qualified_conversations": { "type": "integer", "description": "Северната звезда" }
+      }
+    }
+  }
+}

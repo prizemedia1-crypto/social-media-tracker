@@ -771,14 +771,14 @@ def var2_investor() -> Variation:
                 Layer("route", "", 0.0, 0.0, 0.026, "#334155", start=2.2, dur=2.4, extra={"nodes": [("Varna Airport", "20 km"), ("Varna city", "7 km"), ("Grand Hotel Varna", "200 m to beach")], "xs": [0.6, 0.7, 0.82], "ys": [0.82, 0.62, 0.42]}),
             ]),
             Scene(8.0, "hotel", PAL_DAY_HOTEL, zoom=(1.0, 1.1), tint=(255, 255, 255, 10), vignette=0.3, layers=[
-                Layer("box", "", 0.05, 0.12, INK, start=0.2, extra={"x1": 0.95, "y1": 0.88, "alpha": 205}),
+                Layer("box", "", 0.05, 0.12, color=INK, start=0.2, extra={"x1": 0.95, "y1": 0.88, "alpha": 205}),
                 Layer("chip", "ROOM INVENTORY", 0.08, 0.17, 0.02, WHITE, start=0.5, extra={"bg": "#0f6fa8"}),
                 Layer("title", "Scale of the complex", 0.08, 0.24, 0.06, WHITE, "serif_b", start=0.8),
                 Layer("bars", "", 0.08, 0.38, 0.026, WHITE, start=1.4, dur=2.2, extra={"items": [("Complex rooms", cx["rooms"]), ("Grand Hotel rooms", gh["double_rooms"]), ("Apartments", cx["apartments"]), ("Suites", gh["suites"])], "label_w": 0.2, "bar_w": 0.42}),
                 Layer("body", "One 5-star flagship and four 4-star hotels, a yacht marina and beach dining in a single park estate.", 0.08, 0.76, 0.026, CREAM, start=3.2, extra={"max_w": 0.8}),
             ]),
             Scene(8.0, "sea", PAL_DAY, zoom=(1.08, 1.0), tint=(0, 0, 0, 55), layers=[
-                Layer("box", "", 0.05, 0.12, INK, start=0.2, extra={"x1": 0.95, "y1": 0.88, "alpha": 190}),
+                Layer("box", "", 0.05, 0.12, color=INK, start=0.2, extra={"x1": 0.95, "y1": 0.88, "alpha": 190}),
                 Layer("chip", "REVENUE STREAMS", 0.08, 0.17, 0.02, WHITE, start=0.5, extra={"bg": "#0f6fa8"}),
                 Layer("title", "Diversified operating base", 0.08, 0.24, 0.06, WHITE, "serif_b", start=0.8),
                 Layer("list", "", 0.08, 0.36, 0.028, WHITE, start=1.4, dur=2.2, extra={"items": [
@@ -792,9 +792,9 @@ def var2_investor() -> Variation:
             Scene(8.0, "abstract", PAL_MAP_DARK | {"line": "#0f6fa8", "dot": "#bfe3f5", "glow": "#0f6fa8"}, zoom=(1.0, 1.06), tint=(0, 0, 0, 20), layers=[
                 Layer("chip", "MARKET CONTEXT  |  PUBLIC RECORD " + str(mc["year"]), 0.08, 0.16, 0.02, WHITE, start=0.4, extra={"bg": "#0f6fa8"}),
                 Layer("title", "Institutional interest in the asset", 0.08, 0.23, 0.06, WHITE, "serif_b", start=0.8, extra={"max_w": 0.8}),
-                Layer("stat", "agreed price for a 98.27% stake (2023)", 0.08, 0.38, 0.095, WHITE, start=1.3, anim="count", extra={"value": 28, "prefix": "EUR ", "suffix": "m", "max_w": 0.26}),
-                Layer("stat", "property assets", 0.40, 0.38, 0.095, WHITE, start=1.7, anim="count", extra={"value": mc["property_assets_eur_m"], "prefix": "EUR ", "suffix": "m", "max_w": 0.24}),
-                Layer("stat", "mutual fund portfolio", 0.68, 0.38, 0.095, WHITE, start=2.0, anim="count", extra={"value": mc["fund_portfolio_eur_m"], "prefix": "EUR ", "suffix": "m", "max_w": 0.24}),
+                Layer("stat", "agreed price for a 98.27% stake (2023)", 0.08, 0.38, 0.11, WHITE, start=1.3, anim="count", extra={"value": 28, "prefix": "\u20ac", "suffix": "m", "max_w": 0.24}),
+                Layer("stat", "property assets (valuation)", 0.38, 0.38, 0.11, WHITE, start=1.7, anim="count", extra={"value": mc["property_assets_eur_m"], "prefix": "\u20ac", "suffix": "m", "max_w": 0.24}),
+                Layer("stat", "mutual fund portfolio", 0.66, 0.38, 0.11, WHITE, start=2.0, anim="count", extra={"value": mc["fund_portfolio_eur_m"], "prefix": "\u20ac", "suffix": "m", "max_w": 0.24}),
                 Layer("body", mc["summary"] + ". Source: SeeNews / Property Forum, Nov 2023.", 0.08, 0.72, 0.026, "#bfe3f5", start=2.8, extra={"max_w": 0.84}),
             ]),
             Scene(7.0, "map", PAL_MAP_LIGHT, zoom=(1.06, 1.0), tint=(255, 255, 255, 30), vignette=0.2, layers=[

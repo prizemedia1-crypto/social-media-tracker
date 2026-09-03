@@ -2,7 +2,7 @@
 """
 Grand Hotel Varna - "for sale" presentation videos.
 
-Renders five video variations (different formats, pacing and tone) from a
+Renders six video variations (different formats, pacing and tone) from a
 single facts file.  Every frame is drawn with Pillow, encoded with the ffmpeg
 binary bundled in `imageio-ffmpeg`, and mixed with a procedurally generated
 ambient soundtrack (no external media or licences needed).
@@ -914,13 +914,49 @@ def var5_square() -> Variation:
     )
 
 
-VARIATIONS = [var1_cinematic, var2_investor, var3_reel, var4_lifestyle, var5_square]
+def var6_why_now() -> Variation:
+    """16:9 ~30 s urgency piece - five numbered reasons to buy now."""
+    mc = F["market_context"]
+    RED = "#e11d48"
+    PAL_EMBER = dict(top="#1a0b10", bot="#050307", line=RED, dot="#fda4af", glow="#9f1239")
+
+    def reason(n: int, head: str, body: str, backdrop: str, pal: dict, zoom, tint=(0, 0, 0, 110)) -> Scene:
+        return Scene(4.6, backdrop, pal, zoom=zoom, tint=tint, layers=[
+            Layer("chip", f"REASON {n} OF 5", 0.08, 0.16, 0.02, WHITE, start=0.15, dur=0.4, extra={"bg": RED}),
+            Layer("title", head, 0.08, 0.24, 0.075, WHITE, "serif_b", start=0.3, dur=0.5, extra={"max_w": 0.84}),
+            Layer("body", body, 0.08, 0.56, 0.033, CREAM, start=0.9, dur=0.5, extra={"max_w": 0.8, "line_h": 1.45}),
+        ])
+
+    return Variation(
+        idx=6, slug="why_buy_now", title="Why buy now - 30 s urgency piece (16:9)", size=(1920, 1080), fps=30, xfade=0.45, music="pulse", accent=RED,
+        watermark="Presentation for sale  |  Indicative visuals",
+        scenes=[
+            Scene(4.0, "abstract", PAL_EMBER, zoom=(1.0, 1.1), layers=[
+                Layer("chip", "GRAND HOTEL VARNA  |  FOR SALE", 0.5, 0.34, 0.02, WHITE, start=0.15, dur=0.4, align="center", extra={"bg": RED}),
+                Layer("title", "Five reasons to move now", 0.5, 0.42, 0.09, WHITE, "serif_b", start=0.35, dur=0.6, align="center", extra={"underline": True}),
+                Layer("sub", "A 5-star Black Sea resort estate does not come to market twice", 0.5, 0.60, 0.03, CREAM, "serif", start=1.0, dur=0.5, align="center", extra={"max_w": 0.85}),
+            ]),
+            reason(1, "Scale that cannot be rebuilt", "1,048 rooms, 98 apartments, five hotels and a yacht marina on one park estate, 200 m from the beach. Replicating this footprint on Bulgaria's oldest resort is not possible today.", "marina", PAL_MARINA, (1.0, 1.12)),
+            reason(2, "Institutional money has already validated it", f"In {mc['year']} Black Sea Property agreed to buy a 98.27% stake for approx. EUR 28 million. The asset is on the radar of professional investors - the next buyer sets the price.", "abstract", PAL_EMBER, (1.1, 1.0), tint=(0, 0, 0, 20)),
+            reason(3, "Twelve months of revenue, not one season", "Spa on hot mineral springs, indoor mineral pool, balneo programmes and conference halls for 20 to 220 delegates keep the flagship trading through winter.", "spa", PAL_SPA_WARM, (1.0, 1.1), tint=(0, 0, 0, 70)),
+            reason(4, "A resort on the way up", "St. Constantine & Helena has been renewed since 2017 and is one of the most visited resorts in Bulgaria. Varna Airport is 20 km away, the city 7 km.", "sea", PAL_DUSK, (1.12, 1.0), tint=(0, 0, 0, 80)),
+            reason(5, "Operating from day one", "A trading 5-star flagship with 300 rooms and 30 suites, six restaurants and four bars. Cash flow from completion, with room to reposition rates and brand.", "hotel", PAL_NIGHT_HOTEL, (1.0, 1.12), tint=(0, 0, 0, 130)),
+            Scene(5.5, "abstract", PAL_EMBER, zoom=(1.08, 1.0), layers=[
+                Layer("title", "The data room is open now", 0.5, 0.36, 0.08, WHITE, "serif_b", start=0.3, dur=0.5, align="center", extra={"underline": True, "max_w": 0.85}),
+                Layer("sub", CTA + "  |  Site visits by appointment", 0.5, 0.52, 0.03, CREAM, start=0.9, dur=0.5, align="center", extra={"max_w": 0.85}),
+                Layer("chip", CONTACT, 0.5, 0.64, 0.02, WHITE, start=1.4, dur=0.4, align="center", extra={"bg": RED}),
+            ]),
+        ],
+    )
+
+
+VARIATIONS = [var1_cinematic, var2_investor, var3_reel, var4_lifestyle, var5_square, var6_why_now]
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--preview", action="store_true", help="fast low-res render")
-    ap.add_argument("--only", nargs="*", type=int, help="variation numbers to render (1-5)")
+    ap.add_argument("--only", nargs="*", type=int, help="variation numbers to render (1-6)")
     ap.add_argument("--no-audio", action="store_true")
     args = ap.parse_args()
     os.makedirs(OUT_DIR, exist_ok=True)

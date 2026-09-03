@@ -1,11 +1,11 @@
 # Grand Hotel Varna - "for sale" presentation videos
 
-Five video variations presenting Grand Hotel Varna (St. Constantine & Helena
+Six videos (five presentation variations plus a 30-second "why buy now" piece) presenting Grand Hotel Varna (St. Constantine & Helena
 resort, Varna, Bulgaria) to prospective buyers. Everything is generated from
 `hotel_facts.json` by `render.py`, so copy, numbers and contact details can be
 changed in one place and re-rendered.
 
-## The five variations
+## The videos
 
 | # | File | Format | Length | Tone / use |
 |---|------|--------|--------|------------|
@@ -14,8 +14,9 @@ changed in one place and re-rendered.
 | 3 | `output/03_vertical_reel.mp4` | 1080x1920, 30 fps | ~27 s | Fast-cut vertical reel for Instagram / TikTok / Shorts with pulse soundtrack. |
 | 4 | `output/04_lifestyle_story.mp4` | 1920x1080, 30 fps | ~36 s | Warm "a day at the resort" narrative: spa, pools and park, dining and marina. |
 | 5 | `output/05_square_linkedin.mp4` | 1080x1080, 30 fps | ~22 s | Square post for LinkedIn / Facebook, location and connectivity led, "why now" list. |
+| 6 | `output/06_why_buy_now.mp4` | 1920x1080, 30 fps | ~30 s | Urgency piece: five numbered reasons to buy immediately (scale, 2023 institutional deal, year-round revenue, resort momentum, trading from day one). Red accent, pulse soundtrack. |
 
-All five end with the call to action from `hotel_facts.json` (`cta`) and the
+All six end with the call to action from `hotel_facts.json` (`cta`) and the
 `contact` line. Each has a procedurally generated ambient soundtrack (no
 licensed music).
 
@@ -23,7 +24,7 @@ licensed music).
 
 ```bash
 pip install pillow numpy imageio-ffmpeg
-python3 render.py              # all five, full quality (~15-25 min on 4 cores)
+python3 render.py              # all six, full quality (~10-15 min on 4 cores)
 python3 render.py --preview    # fast 640 px / 12 fps check
 python3 render.py --only 3 5   # selected variations
 python3 render.py --no-audio

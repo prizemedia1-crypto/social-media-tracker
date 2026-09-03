@@ -1,0 +1,57 @@
+{
+  "name": "Grand Hotel Varna",
+  "tagline": "Resort & Spa",
+  "category": "5-star resort hotel",
+  "location": "St. Constantine & Helena resort, Varna, Bulgaria",
+  "resort_note": "Bulgaria's oldest Black Sea resort",
+  "distances": {
+    "beach_m": 200,
+    "varna_km": 7,
+    "airport_km": 20
+  },
+  "grand_hotel": {
+    "double_rooms": 300,
+    "suites": 30,
+    "storeys": 11
+  },
+  "complex": {
+    "hotels": ["Grand Hotel Varna (5*)", "Dolphin (4*)", "Dolphin Marina (4*)", "Rubin (4*)", "Lebed (4*)"],
+    "rooms": 1048,
+    "apartments": 98,
+    "marina": "Yacht marina",
+    "setting": "Landscaped park, 200 m from the beach"
+  },
+  "dining": {
+    "restaurants": 6,
+    "restaurant_types": ["Main", "A-la-carte", "Fish", "Italian", "Barbecue", "Asian", "Beach"],
+    "bars": ["Lobby bar", "Day bar", "Sky bar", "Viennese cafe"]
+  },
+  "wellness": [
+    "Spa & wellness centre on hot mineral springs",
+    "Indoor mineral-water pool",
+    "Outdoor pool with children's section",
+    "Balneo & physiotherapy programmes",
+    "Sauna & solarium"
+  ],
+  "business": {
+    "conference_halls": "Halls for 20 to 220 delegates",
+    "note": "Modern business centre, professional event services"
+  },
+  "market_context": {
+    "year": 2023,
+    "summary": "Black Sea Property agreed to acquire a 98.27% stake for approx. EUR 28 million",
+    "property_assets_eur_m": 19,
+    "fund_portfolio_eur_m": 12
+  },
+  "contact": "",
+  "cta": "Request the Information Memorandum",
+  "sources": [
+    "https://www.sunshine.co.uk/hotels/grand_hotel_varna-15512.html",
+    "https://www.en.hotels.bg/Hotels-in-St-St-Constantine-and-Helena/Varna/",
+    "https://www.travelweekly.com/Hotels/Varna-Bulgaria/Grand-Hotel-Varna-Resort-Spa-p4370695",
+    "http://www.zlatentour.com/en/marine-hotels/grand_hotel_varna_resort_spa/",
+    "https://www.livetheworld.com/activities/bulgaria/grand-hotel-varna",
+    "https://seenews.com/news/black-sea-property-buys-bulgarias-grand-hotel-varna-1238873",
+    "https://www.property-forum.eu/news/black-sea-property-to-take-over-grand-hotel-varna/16285"
+  ]
+}
